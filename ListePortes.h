@@ -1,7 +1,7 @@
 /**
  * \file ListePortes.h
  * \brief Ce fichier contient l'interface d'une liste de portes.
- * \author Admin
+ * \author Mathieu L'Ecuyer
  * \version 0.1
  * \date mai 2014
  * 

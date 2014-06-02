@@ -227,7 +227,32 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 	//rien faire (faire un simple return, sans générer d'exception).
 	void Labyrinthe::ajoutePieceLabyrinthe(Piece &p)
 	{
+		
+		if(dernier ==0)
+		{
+			//Dans le cas ou la liste est vide
+			dernier = new NoeudListePieces(p);
+			dernier->suivant = dernier;
+		}
+		else{
 
+			//On parcour la liste pour vérifier si une piece porte un même nom
+			NoeudListePieces *courant = 0;
+			courant = dernier->suivant;
+			while(courant!=dernier)
+			{
+				if(courant->piece.getNom() == p.getNom())
+					return;
+				courant=courant->suivant;
+			}
+
+			//On ajoute la piece à la fin.
+			NoeudListePieces *nouveau = new NoeudListePieces(p);
+			nouveau->suivant=dernier->suivant;
+			dernier->suivant = nouveau;
+			dernier = nouveau;
+		}
+		return ;
 	}
 
 	//TODO

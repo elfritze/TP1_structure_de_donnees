@@ -19,27 +19,33 @@ namespace TP1
 
 
 	//Constructeur par défaut
-	Labyrinthe::Labyrinthe()
-	{
-
-	}
+	Labyrinthe::Labyrinthe() : depart(0),arrivee(0),dernier(0){}
 
 	//Destructeur
 	Labyrinthe:: ~Labyrinthe()
 	{
-
+		_detruire();
 	}
 
 	//constructeur de copie
-	Labyrinthe::Labyrinthe(const Labyrinthe&)
+	Labyrinthe::Labyrinthe(const Labyrinthe& l)
 	{
-
+		if (l.dernier == 0)
+			dernier = 0;
+		else
+			_copier(l.dernier);
 	}
 
 	//Surcharge de l'opérateur =
 	const Labyrinthe& Labyrinthe::operator =(const Labyrinthe& source)
 	{
-		return source;
+		_detruire();
+		if (source.dernier == 0)
+			dernier = 0;
+		else
+			_copier(source.dernier);
+
+		return (*this);
 	}
 
 // -------------------------------------------------------------------------------------------------
@@ -255,7 +261,7 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 	//et non l'adresse de la pièce.
 	Labyrinthe::NoeudListePieces *Labyrinthe::trouvePiece(std::string &nom) const 
 	{
-		return new NoeudListePieces();
+		return new NoeudListePieces(Piece());
 	}
 
 	//TODO
@@ -276,6 +282,43 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 		
 	}
 
+
+	void Labyrinthe:: _copier(NoeudListePieces * sn)
+	{
+		try{
+			dernier = new NoeudListePieces(sn->piece);
+			NoeudListePieces * nouveau = dernier;
+			for (NoeudListePieces * temp = sn->suivant; temp != sn; temp = temp->suivant )
+			{
+				nouveau->suivant = new NoeudListePieces(temp->piece);
+				nouveau = nouveau->suivant;
+				nouveau->suivant = dernier;
+			}
+			nouveau->suivant = dernier;
+		}
+		catch(std::exception&)
+		{
+			_detruire();
+			throw;
+		}
+	}
+
+
+	void Labyrinthe:: _detruire()
+	{
+		if(dernier !=0)
+		{
+			NoeudListePieces * courant = dernier->suivant;
+			NoeudListePieces * autre = courant;
+			while(courant!=dernier)
+			{
+				courant=courant->suivant;
+				delete autre;
+				autre=courant;
+			}
+			delete dernier;
+		}
+	}
 
 }
 

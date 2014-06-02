@@ -127,6 +127,10 @@ private:
 
 			// Le noeud suivant
 			NoeudListePieces *suivant;
+
+			//Constructeur de la classe Noeud
+			explicit NoeudListePieces (const Piece& data_item, NoeudListePieces * next_ptr = 0) :
+										piece(data_item), suivant(next_ptr) {}
 	};
 
 	//Méthode privée. Retourne l'adresse du noeud de la liste de pièces contenue dans le labyrinthe lab
@@ -143,6 +147,12 @@ private:
 	// Adresses des pièces de départ et d'arrivée. Remarquez que ces adresses doivent
 	// être celles des pièces et non des noeuds chaînée circulaire de la liste de pièces.
 	Piece *depart, *arrivee;
+
+	//Méthode de copie d'un labyrinthe
+	void _copier( NoeudListePieces *);
+
+	//Détruire le labyrinthe
+	void  _detruire();
 
 };
 

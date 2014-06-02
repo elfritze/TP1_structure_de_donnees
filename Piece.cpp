@@ -13,51 +13,53 @@ namespace TP1
 {
 
 	//constructeur par défaut
-	Piece::Piece()
+	Piece::Piece() : parcourue(false)
 	{
-
+		portes = ListePortes();
 	}
 
 	//Surcharge du constructeur, le nom de la pièce en argument
-	Piece::Piece(const std::string & s)
+	Piece::Piece(const std::string & s) : nom(s) , parcourue(false)
 	{
-
+		portes = ListePortes();
 	}
 
 	//destructeur
 	Piece:: ~Piece()
 	{
-
+		portes.~ListePortes();
 	}
 
 	//constructeur de copie
-	Piece::Piece(const Piece&)
+	Piece::Piece(const Piece& p)
 	{
-
+		nom = p.getNom();
+		parcourue = p.getParcourue();
+		portes = p.portes;
 	}
 
 	//Surcharge de l'opérateur =
 	const Piece& Piece::operator =(const Piece& source)
 	{
-		return source;
+		return Piece(source);
 	}
 
 	//Accesseur du nom d'une pièce
 	std::string Piece::getNom() const
 	{
-		return "";
+		return nom;
 	}
 
 	//Pour initialiser l'attibut parcourue à true ou false
 	void Piece::setParcourue(bool p)
 	{
-
+		parcourue = p;
 	}
 
 	//Acceder au membre parcourue
 	bool Piece::getParcourue() const
 	{
-		return false;
+		return parcourue;
 	}
 
 	//Accéder à la liste des portes qui partent de la pièce
@@ -69,7 +71,7 @@ namespace TP1
 	//Ajouter une porte à la liste des portes qui partent de la pièce
 	void  Piece::ajoutePorte(Porte& p)
 	{
-
+		portes.ajoutePorte(p);
 	}
 
 }

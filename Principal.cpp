@@ -112,6 +112,8 @@ int main()
 		std::cout << std::endl << "Chemin Jaune : " << std::endl;
 		nomduchemin = lab.cheminLabyrinthe(TP1::Jaune);
 		nomduchemin.afficheChemin();
+		string str;
+		getline(cin, str);
 
 	} catch (exception & e)
 	{

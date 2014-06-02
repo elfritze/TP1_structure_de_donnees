@@ -15,20 +15,19 @@ namespace TP1
 	//Constructeur par défaut
 	FilePieces::FilePieces()
 	{
-		ch = Chemin("test",0);
-		int dumm = 9;
+		ch = Chemin();
 	}
 
 	//Destructeur
 	FilePieces:: ~FilePieces()
 	{
-
+		ch.~Chemin();
 	}
 
 	//constructeur de copie
-	FilePieces::FilePieces(const FilePieces&)
+	FilePieces::FilePieces(const FilePieces& f)
 	{
-
+		ch = f.ch;
 	}
 
 	//Surcharge de l'opérateur =
@@ -41,7 +40,7 @@ namespace TP1
 	//par un chemin, cette méthode ne fera qu'un appel simple à la méthode ajoutePiece().
 	void FilePieces::enfilePiece(const std::string &nomPiece, int distanceDuDebut)
 	{
-
+		ch.ajoutePiece(nomPiece,distanceDuDebut);
 	}
 
 	//Retire une pièce du début d'une file et place le nom de la pièce retirée dans nomPieceRetiree,
@@ -49,7 +48,9 @@ namespace TP1
 	//cette fonction fera un appel à la fonction retirePiece(). Une exception logic_error devra être levée si la file est vide.
 	void FilePieces::defilePiece(std::string & nomPieceRetiree, int &distanceDuDebut)
 	{
-
+		nomPieceRetiree = ch.getNomPiece();
+		distanceDuDebut = ch.getDistanceDuDebut();
+		ch.retirePiece(1);
 	}
 
 	//Vérifie si une file de pièces est vide

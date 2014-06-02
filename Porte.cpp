@@ -9,47 +9,55 @@
 
 #include "Porte.h"
 
+using namespace std;
+
 namespace TP1
 {
 
 	//Constructeur, en argument la couleur de la porte ainsi que la pièce de destination
-	Porte::Porte(Couleur c, Piece * d)
+	Porte::Porte(Couleur c, Piece* d) : color(c)
 	{
-
+	   destination = d;
 	}
 
 	//constructeur par défaut
-	Porte::Porte()
+	Porte::Porte() : color(Aucun)
 	{
-
+	   destination = NULL;
 	}
 
 	//un destructeur qui ne fera rien
-	Porte:: ~Porte()
+	Porte::~Porte()
 	{
 
 	}
 
 	//Constructeur de copie
-	Porte::Porte(const Porte&)
+	Porte::Porte(const Porte& source) : color(source.color)
 	{
-
+	   destination = source.destination;
 	}
 
 	//Surcharge de l'opérateur =
 	const Porte& Porte::operator =(const Porte& source)
 	{
-		return source;
+	   if (this != &source)
+	   {
+	      color = source.color;
+	      destination = source.destination;
+	   }
+
+		return *this;
 	}
 
 	//accesseur de la couleur d'une porte
 	Couleur Porte::getCouleur() const
 	{
-		return Jaune;
+		return color;
 	}
 
 	//Accesseur de la piece de destination
-	Piece * Porte::getDestination() const
+	Piece* Porte::getDestination() const
 	{
 		return destination;
 	}

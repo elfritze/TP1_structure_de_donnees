@@ -260,7 +260,23 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 	//Retourne le nombre de dépalcements requis pour qu'un joueur traverse le labyrinthe.
 	int Labyrinthe::solutionner(Couleur joueur)
 	{
+		int distance;
+		string nomPiece;
+		Piece * courant = depart;
 		FilePieces pieces = FilePieces();
+		pieces.enfilePiece(courant->getNom(),0);
+		do{
+			pieces.defilePiece(nomPiece,distance);
+			courant =  &trouvePiece(nomPiece)->piece;
+			for (int i = 1;i < courant->getPortes().tailleListePortes(); i ++){
+				Piece * temp  = courant->getPortes().elementAt(i).getDestination();
+				if(!temp->getParcourue() && courant->getPortes().elementAt(i).getCouleur()==joueur)
+					pieces.enfilePiece(temp->getNom(),distance+1);
+			}
+			courant->setParcourue(true);
+			
+		}while(!pieces.estVideFile());
+
 		return 1;
 	}
 

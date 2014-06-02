@@ -56,7 +56,7 @@ namespace TP1
 	//Vérifie si une file de pièces est vide
 	bool FilePieces::estVideFile() const
 	{
-		return false;
+		return ch.tailleChemin()==0;
 	}
 
 }

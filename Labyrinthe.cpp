@@ -191,5 +191,69 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 	piece1->piece.ajoutePorte(nouvellePorte);
 }
 
+	//TODO
+	//Cette fonction doit ajouter la pièce p à un labyrinthe. Dans le cas où
+	//une pièce du labyrinthe porte déjà un même nom, la méthode ne doit
+	//rien faire (faire un simple return, sans générer d'exception).
+	void Labyrinthe::ajoutePieceLabyrinthe(Piece &p)
+	{
 
-}//fin du namespace
+	}
+
+	//TODO
+	//Méthode qui solutionnera le labyrinthe.
+	//Retourne le nombre de dépalcements requis pour qu'un joueur traverse le labyrinthe.
+	int Labyrinthe::solutionner(Couleur joueur)
+	{
+		return 1;
+	}
+
+	//TODO
+	//Méthode qui solutionnera le labyrinthe.
+	//Retourne le chemin pris par le joueur.
+	Chemin Labyrinthe::cheminLabyrinthe(Couleur joueur)
+	{
+		return Chemin();
+	}
+
+	//TODO
+	//Appelle 4 fois la méthode solutionner pour trouver le joueur gagnant.
+	Couleur Labyrinthe::trouveGagnant()
+	{
+		return Rouge;
+	}
+
+	//TODO
+	//Méthode privée. Retourne l'adresse du noeud de la liste de pièces contenue dans le labyrinthe lab
+	//qui correspond à la pièce portant le nom nom, la méthode doit lancer une exception invalid_argument si le nom de
+	//la pièce est vide. La méthode doit lancer également une exception logic_error si la pièce est introuvable.
+	//Remarquez qu'il faut retourner l'adresse du noeud de la liste doublement chaînée de pièces,
+	//et non l'adresse de la pièce.
+	Labyrinthe::NoeudListePieces *Labyrinthe::trouvePiece(std::string &nom) const 
+	{
+		return new NoeudListePieces();
+	}
+
+	//TODO
+	//Méthode privée, elle sert pour charger un labyrinthe. Ajuste le pointeur depart d'un labyrinthe
+	//pour qu'il contienne l'adresse de la pièce correspondant au nom spécifié par nom. Lancer une
+	//exception logic_error si aucune pièce du labyrinthe ne porte le nom nom.
+	void Labyrinthe::placeDepart(std::string& nom)
+	{
+		
+	}
+
+	//TODO
+	//Méthode privée, elle sert pour charger un labyrinthe. Ajuste le pointeur arrivé d'un labyrinthe
+	//pour qu'il contienne l'adresse de la pièce correspondant au nom spécifié par nom. Lancer une
+	//exception logic_error si aucune pièce du labyrinthe ne porte le nom nom.
+	void Labyrinthe::placeArrivee(std::string& nom)
+	{
+		
+	}
+
+
+}
+
+
+//fin du namespace

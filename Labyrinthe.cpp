@@ -260,22 +260,47 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 	//Retourne le nombre de dépalcements requis pour qu'un joueur traverse le labyrinthe.
 	int Labyrinthe::solutionner(Couleur joueur)
 	{
+		/*bool done = false;
 		int distance;
 		string nomPiece;
 		Piece * courant = depart;
+		Piece * temp = 0;
 		FilePieces pieces = FilePieces();
 		pieces.enfilePiece(courant->getNom(),0);
+		courant->setParcourue(true);
 		do{
 			pieces.defilePiece(nomPiece,distance);
 			courant =  &trouvePiece(nomPiece)->piece;
+			if(courant->getNom() == arrivee->getNom())
+				done = true;
+
 			for (int i = 1;i < courant->getPortes().tailleListePortes(); i ++){
-				Piece * temp  = courant->getPortes().elementAt(i).getDestination();
+
+				temp  = courant->getPortes().elementAt(i).getDestination();
 				if(!temp->getParcourue() && courant->getPortes().elementAt(i).getCouleur()==joueur)
+				{
+					temp->setParcourue(true);
 					pieces.enfilePiece(temp->getNom(),distance+1);
+				}
+
 			}
-			courant->setParcourue(true);
+
 			
-		}while(!pieces.estVideFile());
+			for (NoeudListePieces * i = dernier->suivant; i != dernier; i = i->suivant )
+			{
+				for (int j = 1;j < i->piece.getPortes().tailleListePortes(); i ++){
+
+					temp  = i->piece.getPortes().elementAt(j).getDestination();
+					if(i->piece.getPortes().elementAt(j).getCouleur()==joueur && temp==courant)
+					{
+						temp->setParcourue(true);
+						pieces.enfilePiece(temp->getNom(),distance+1);
+					}
+
+				}
+			}
+			
+		}while(!pieces.estVideFile() && !done);*/
 
 		return 1;
 	}

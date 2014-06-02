@@ -13,9 +13,14 @@ namespace TP1
 {
 
 	//Constructeur par défaut
-	Chemin::Chemin()
-	{
+	Chemin::Chemin() : debut(0){}
 
+	//Constructeur prenant le nom d'une piece et la distance du début
+	Chemin::Chemin(std::string nom,int distance) : debut(0)
+	{
+		debut = new NoeudChemin();
+		debut->nomPiece=nom;
+		debut->distanceDuDebut=distance;
 	}
 
 	//Destructeur

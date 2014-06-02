@@ -23,6 +23,9 @@ public:
 	//Constructeur par défaut
 	Chemin();
 
+	//Constructeur prenant le nom d'une piece et la distance du début
+	Chemin(std::string nomPiece,int distanceDuDebut);
+
 	//Destructeur
 	virtual ~Chemin();
 

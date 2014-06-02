@@ -15,7 +15,8 @@ namespace TP1
 	//Constructeur par défaut
 	FilePieces::FilePieces()
 	{
-
+		ch = Chemin("test",0);
+		int dumm = 9;
 	}
 
 	//Destructeur

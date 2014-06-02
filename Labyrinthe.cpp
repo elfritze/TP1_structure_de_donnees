@@ -286,6 +286,15 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 	//et non l'adresse de la pièce.
 	Labyrinthe::NoeudListePieces *Labyrinthe::trouvePiece(std::string &nom) const 
 	{
+		//On parcour la liste pour vérifier si une piece porte un même nom
+		NoeudListePieces *courant = 0;
+		courant = dernier->suivant;
+		while(courant!=dernier)
+		{
+			if(courant->piece.getNom() == nom)
+				return courant;
+			courant=courant->suivant;
+		}
 		return new NoeudListePieces(Piece());
 	}
 
@@ -295,7 +304,7 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 	//exception logic_error si aucune pièce du labyrinthe ne porte le nom nom.
 	void Labyrinthe::placeDepart(std::string& nom)
 	{
-		
+		depart = &trouvePiece(nom)->piece;
 	}
 
 	//TODO
@@ -304,7 +313,7 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 	//exception logic_error si aucune pièce du labyrinthe ne porte le nom nom.
 	void Labyrinthe::placeArrivee(std::string& nom)
 	{
-		
+		arrivee = &trouvePiece(nom)->piece;
 	}
 
 

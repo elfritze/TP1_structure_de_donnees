@@ -12,6 +12,45 @@
 namespace TP1
 {
 
-	//Mettez l'implémentation de vos méthodes ici.
+	//Constructeur, en argument la couleur de la porte ainsi que la pièce de destination
+	Porte::Porte(Couleur c, Piece * d)
+	{
 
+	}
+
+	//constructeur par défaut
+	Porte::Porte()
+	{
+
+	}
+
+	//un destructeur qui ne fera rien
+	Porte:: ~Porte()
+	{
+
+	}
+
+	//Constructeur de copie
+	Porte::Porte(const Porte&)
+	{
+
+	}
+
+	//Surcharge de l'opérateur =
+	const Porte& Porte::operator =(const Porte& source)
+	{
+		return source;
+	}
+
+	//accesseur de la couleur d'une porte
+	Couleur Porte::getCouleur() const
+	{
+		return Jaune;
+	}
+
+	//Accesseur de la piece de destination
+	Piece * Porte::getDestination() const
+	{
+		return destination;
+	}
 }

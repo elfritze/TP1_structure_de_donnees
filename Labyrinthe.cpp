@@ -18,6 +18,30 @@ namespace TP1
  using namespace std;
 
 
+	//Constructeur par défaut
+	Labyrinthe::Labyrinthe()
+	{
+
+	}
+
+	//Destructeur
+	Labyrinthe:: ~Labyrinthe()
+	{
+
+	}
+
+	//constructeur de copie
+	Labyrinthe::Labyrinthe(const Labyrinthe&)
+	{
+
+	}
+
+	//Surcharge de l'opérateur =
+	const Labyrinthe& Labyrinthe::operator =(const Labyrinthe& source)
+	{
+		return source;
+	}
+
 // -------------------------------------------------------------------------------------------------
 //	Chargement
 // -------------------------------------------------------------------------------------------------

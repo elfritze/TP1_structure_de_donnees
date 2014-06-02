@@ -8,51 +8,72 @@
  */
 
 #include "Chemin.h"
-
+#include <iostream>
+using namespace std;
 namespace TP1
 {
 
 	//Constructeur par défaut
 	Chemin::Chemin() : debut(0){}
 
-	//Constructeur prenant le nom d'une piece et la distance du début
-	Chemin::Chemin(std::string nom,int distance) : debut(0)
-	{
-		debut = new NoeudChemin();
-		debut->nomPiece=nom;
-		debut->distanceDuDebut=distance;
-	}
-
 	//Destructeur
 	Chemin:: ~Chemin()
 	{
-		
+		_detruire();
 	}
 
 	//constructeur de copie
-	Chemin::Chemin(const Chemin&)
+	Chemin::Chemin(const Chemin& source)
 	{
-
+		debut = source.debut;
+		if (debut!=0)
+		{
+			_copier(source.debut);
+		}
 	}
 
 	//Surcharge de l'opérateur =
 	const Chemin& Chemin::operator= (const Chemin& source)
 	{
-		return source;
+		if (debut!=0)
+			_detruire();
+
+		debut = source.debut;
+		if(source.debut!=0)
+			_copier(source.debut);
+
+		return (*this);
 	}
 
 	//Ajoute le nom d'une pièce avec sa distance au début, spécifiés par nomPiece et distanceDuDebut,
 	//à un chemin. Il n'y a pas de vérification particulière de doublons à faire.
 	void Chemin::ajoutePiece(const std::string &nomPiece, int distanceDuDebut)
 	{
-
+		NoeudChemin * nouveau = new NoeudChemin(nomPiece,distanceDuDebut);
+		nouveau->suivant=debut;
+		debut = nouveau;
 	}
 
 	//Supprime une pièce d'un chemin, dont l'indice dans la liste chaînée,commençant par 1,
 	//est spécifié par numPiece. La méthode doit lancer une exception invalid_argument si l'indice est invalide.
 	void Chemin::retirePiece(int numPiece)
 	{
+		if(numPiece >= 1 && numPiece <= tailleChemin()){
+			int i = 1;
+			NoeudChemin * courant = debut;
+			NoeudChemin * precedent = courant;
+			while(i < numPiece)
+			{
+				precedent = courant;
+				courant = courant->suivant;
+				i++;
+			}
+			precedent->suivant=courant->suivant;
+			courant->suivant=0;
+			delete courant;
 
+		}else
+			throw std::invalid_argument("L'indice est invalide");
 	}
 
 	/**
@@ -69,13 +90,17 @@ namespace TP1
 	 */
 	int Chemin::getDistanceDuDebut() const
 	{
-		return 0;
+		return debut->distanceDuDebut;
 	}
 
 	//Retourne la taille d'un chemin.
 	int Chemin::tailleChemin() const
 	{
-		return 0;
+		int i = 0;
+		for (NoeudChemin* temp = debut;temp != 0;temp = temp->suivant)
+			i++;
+
+		return i;
 	}
 
 	//Affiche le chemin c en affichant, ligne par ligne, chaque nom de case suivi d'une espace puis de la distance du début.
@@ -86,7 +111,45 @@ namespace TP1
 	//  Blabla 3
 	void Chemin::afficheChemin() const
 	{
+		for (NoeudChemin* temp = debut;temp != 0;temp = temp->suivant)
+		{
+			cout << temp->nomPiece + " " + to_string(temp->distanceDuDebut);
+		}
+	}
 
+
+	void Chemin:: _copier(NoeudChemin* sn)
+	{
+		try{
+
+			// copier le premier noeud
+			debut = new NoeudChemin(sn->nomPiece,sn->distanceDuDebut);
+
+			NoeudChemin* nouveau = debut;
+			for (NoeudChemin* temp = sn->suivant;temp != 0;temp = temp->suivant)
+			{
+				nouveau->suivant = new NoeudChemin(temp->nomPiece,temp->distanceDuDebut);
+				nouveau = nouveau->suivant;
+			}
+		}
+		catch(std::exception&)
+		{
+			_detruire();
+			throw;
+		}
+	}
+
+	void Chemin::_detruire()
+	{
+		NoeudChemin * courant = debut;
+		NoeudChemin * temp = 0;
+		while (courant!=0)
+		{
+			temp = courant->suivant;
+			delete courant;
+			courant = temp;
+		}
+		
 	}
 
 }

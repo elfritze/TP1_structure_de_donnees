@@ -260,6 +260,7 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 	//Retourne le nombre de dépalcements requis pour qu'un joueur traverse le labyrinthe.
 	int Labyrinthe::solutionner(Couleur joueur)
 	{
+		FilePieces pieces = FilePieces();
 		return 1;
 	}
 

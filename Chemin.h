@@ -23,9 +23,6 @@ public:
 	//Constructeur par défaut
 	Chemin();
 
-	//Constructeur prenant le nom d'une piece et la distance du début
-	Chemin(std::string nomPiece,int distanceDuDebut);
-
 	//Destructeur
 	virtual ~Chemin();
 
@@ -78,13 +75,21 @@ private:
 			// Le point suivant du chemin (pièce suivante), ou 0 (NULL) s'il s'agit de la fin du chemin.
 			NoeudChemin *suivant;
 
-			//Notez bien. Vous pouvez ajouter à cette classe un constructeur qui prend en argument un string et un int
-			//pour initialiser nomPiece et distanceDebut respectivement
+			//Constructeur prenant le nom d'une piece et la distance du début
+			explicit NoeudChemin (std::string nomPiece,int distanceDuDebut) :
+										nomPiece(nomPiece), distanceDuDebut(distanceDuDebut) {}
+
 	};
 
 	// Un chemin est défini comme un pointeur vers le premier noeud de la liste simplement chaînée.
 	// Un chemin vide est représenté directement par le pointeur 0 (NULL).
 	NoeudChemin *debut;
+
+	//Detruire le chemin
+	void  _detruire();
+
+	//Copier un chemin
+	void _copier( NoeudChemin *);
 };
 
 }

@@ -261,8 +261,8 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 	int Labyrinthe::solutionner(Couleur joueur)
 	{
 		/*bool done = false;
-		int distance;
-		string nomPiece;
+		int distance = 0;
+		string nomPiece = "";
 		Piece * courant = depart;
 		Piece * temp = 0;
 		FilePieces pieces = FilePieces();

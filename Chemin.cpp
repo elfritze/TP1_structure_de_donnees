@@ -81,8 +81,7 @@ namespace TP1
 	 */
 	const std::string & Chemin::getNomPiece() const
 	{
-		const std::string &str = "";
-		return str;
+		return debut->nomPiece;
 	}
 
 	/**
@@ -113,7 +112,7 @@ namespace TP1
 	{
 		for (NoeudChemin* temp = debut;temp != 0;temp = temp->suivant)
 		{
-			cout << temp->nomPiece + " " + std::to_string(temp->distanceDuDebut);
+			cout << temp->nomPiece << " " << temp->distanceDuDebut ;
 		}
 	}
 

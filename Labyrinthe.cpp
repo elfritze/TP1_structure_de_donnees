@@ -238,7 +238,7 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 
 			//On parcour la liste pour vérifier si une piece porte un même nom
 			NoeudListePieces *courant = 0;
-			courant = dernier->suivant;
+			courant = dernier;
 			while(courant!=dernier)
 			{
 				if(courant->piece.getNom() == p.getNom())

@@ -113,7 +113,7 @@ namespace TP1
 	{
 		for (NoeudChemin* temp = debut;temp != 0;temp = temp->suivant)
 		{
-			cout << temp->nomPiece + " " + to_string(temp->distanceDuDebut);
+			cout << temp->nomPiece + " " + std::to_string(temp->distanceDuDebut);
 		}
 	}
 

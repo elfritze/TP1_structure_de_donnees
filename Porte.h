@@ -18,7 +18,7 @@ namespace TP1
  La valeur "Aucun" est une valeur spéciale utilisée dans la fonction "trouveGagnant".*/
 typedef enum
 {
-	Rouge, Vert, Bleu, Jaune, Aucun
+   Rouge, Vert, Bleu, Jaune, Aucun
 } Couleur;
 
 // La ligne qui suit sert à signifier au compilateur que la classe "Piece" existe.
@@ -29,31 +29,31 @@ class Piece;
 class Porte
 {
 public:
-	//Constructeur, en argument la couleur de la porte ainsi que la pièce de destination
-	Porte(Couleur c, Piece * d);
+   //Constructeur, en argument la couleur de la porte ainsi que la pièce de destination
+   Porte(Couleur c, Piece * d);
 
-	//constructeur par défaut
-	Porte();
+   //constructeur par défaut
+   Porte();
 
-	//un destructeur qui ne fera rien
-	virtual ~Porte();
+   //un destructeur qui ne fera rien
+   virtual ~Porte();
 
-	//Constructeur de copie
-	Porte(const Porte&);
+   //Constructeur de copie
+   Porte(const Porte&);
 
-	//Surcharge de l'opérateur =
-	const Porte& operator =(const Porte& source);
+   //Surcharge de l'opérateur =
+   const Porte& operator =(const Porte& source);
 
-	//accesseur de la couleur d'une porte
-	Couleur getCouleur() const;
+   //accesseur de la couleur d'une porte
+   Couleur getCouleur() const;
 
-	//Accesseur de la piece de destination
-	Piece * getDestination() const;
+   //Accesseur de la piece de destination
+   Piece * getDestination() const;
 
 private:
-	Piece * destination; // Vers où la porte mène.
-	Couleur color; // Couleur de la porte. Cette couleur spécifie en même temps
-	// quel est le joueur qui a le droit de franchir cette porte.
+   Piece * destination; // Vers où la porte mène.
+   Couleur color; // Couleur de la porte. Cette couleur spécifie en même temps
+   // quel est le joueur qui a le droit de franchir cette porte.
 };
 
 }

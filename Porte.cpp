@@ -14,51 +14,55 @@ using namespace std;
 namespace TP1
 {
 
-	//Constructeur, en argument la couleur de la porte ainsi que la pièce de destination
-	Porte::Porte(Couleur c, Piece* d) : color(c)
-	{
-	   destination = d;
-	}
+//Constructeur, en argument la couleur de la porte ainsi que la pièce de destination
+Porte::Porte(Couleur c, Piece* d) :
+      color(c)
+{
+   destination = d;
+}
 
-	//constructeur par défaut
-	Porte::Porte() : color(Aucun)
-	{
-	   destination = NULL;
-	}
+//constructeur par défaut
+Porte::Porte() :
+      color(Aucun)
+{
+   destination = 0;
+}
 
-	//un destructeur qui ne fera rien
-	Porte::~Porte()
-	{
+//un destructeur qui ne fera rien
+Porte::~Porte()
+{
 
-	}
+}
 
-	//Constructeur de copie
-	Porte::Porte(const Porte& source) : color(source.color)
-	{
-	   destination = source.destination;
-	}
+//Constructeur de copie
+Porte::Porte(const Porte& source) :
+      color(source.color)
+{
+   destination = source.destination;
+}
 
-	//Surcharge de l'opérateur =
-	const Porte& Porte::operator =(const Porte& source)
-	{
-	   if (this != &source)
-	   {
-	      color = source.color;
-	      destination = source.destination;
-	   }
+//Surcharge de l'opérateur =
+const Porte& Porte::operator =(const Porte& source)
+{
+   if (this != &source)
+   {
+      color = source.color;
+      destination = source.destination;
+   }
 
-		return *this;
-	}
+   return *this;
+}
 
-	//accesseur de la couleur d'une porte
-	Couleur Porte::getCouleur() const
-	{
-		return color;
-	}
+//accesseur de la couleur d'une porte
+Couleur Porte::getCouleur() const
+{
+   return color;
+}
 
-	//Accesseur de la piece de destination
-	Piece* Porte::getDestination() const
-	{
-		return destination;
-	}
+//Accesseur de la piece de destination
+Piece* Porte::getDestination() const
+{
+   return destination;
+}
+
 }

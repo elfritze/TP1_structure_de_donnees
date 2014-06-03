@@ -38,7 +38,7 @@ public:
 	//ne peuvent pas relier deux mêmes pièces. Si une tentative d'ajouter une porte
 	//menant à la même pièce et ayant la même couleur qu'une porte déjà présente
 	//dans la liste est effectuée, il faut lancer une exception logic_error (doublon).
-	void ajoutePorte(Porte &p);
+	void ajoutePorte(Porte& p);
 
 	//Cette fonction doit retourner le nombre de portes présentes dans la liste de portes.
 	int tailleListePortes() const;
@@ -64,10 +64,19 @@ private:
 			Porte porte; // La porte contenue dans ce noeud de la liste chaînée.
 			NoeudListePortes *suivant; // Un pointeur vers le noeud suivant de la liste. NULL s'il s'agit du dernier noeud.
 			NoeudListePortes *precedent;// Un pointeur vers le noeud précédent de la liste. NULL s'il s'agit du premier noeud.
+
+			explicit NoeudListePortes(const Porte& porte, NoeudListePortes *next_ptr = 0,
+			                          NoeudListePortes *prev_ptr = 0) :
+			                          porte(porte), suivant(next_ptr), precedent(prev_ptr){}
 	};
 
-	NoeudListePortes *acces;// pointeur sur le début de la liste des portes
+   NoeudListePortes *acces;// pointeur sur le début de la liste des portes
 	NoeudListePortes *fin;// pointeur sur la fin de la liste des portes
+	int nbPorte; // nombre de portes dans la liste des portes
+
+	// Méthodes privées
+	void _copier(NoeudListePortes* sourceAcces);
+	void _detruire();
 };
 
 }

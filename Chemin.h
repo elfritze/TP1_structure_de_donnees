@@ -76,8 +76,8 @@ private:
 			NoeudChemin *suivant;
 
 			//Constructeur prenant le nom d'une piece et la distance du début
-			explicit NoeudChemin (std::string nomPiece,int distanceDuDebut) :
-										nomPiece(nomPiece), distanceDuDebut(distanceDuDebut) {}
+			explicit NoeudChemin(std::string nomPiece,int distanceDuDebut,NoeudChemin* next_ptr = 0) :
+			                     nomPiece(nomPiece), distanceDuDebut(distanceDuDebut), suivant(next_ptr) {}
 
 	};
 

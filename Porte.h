@@ -4,21 +4,35 @@
  * \author Admin
  * \version 0.1
  * \date mai 2014
- * 
  */
+
+// Révision des commentaires avec balises Doxygen.
+// Mis à jour par : Éric Guillemette, Mathieu L'Écuyer
 
 #ifndef PORTE_H_
 #define PORTE_H_
 
 #include <stdexcept>
 
+/**
+ * \namespace TP1
+ *
+ * Espace de nommage regroupant les définitions du TP1.
+ */
 namespace TP1
 {
-/* Couleur d'une porte ou d'un joueur.
- La valeur "Aucun" est une valeur spéciale utilisée dans la fonction "trouveGagnant".*/
+
+/**
+ * \enum Couleur
+ * \brief Couleur d'une porte ou d'un joueur.
+ */
 typedef enum
 {
-   Rouge, Vert, Bleu, Jaune, Aucun
+   Rouge,
+   Vert,
+   Bleu,
+   Jaune,
+   Aucun /*!< Valeur spéciale utilisée dans la fonction "trouveGagnant". */
 } Couleur;
 
 // La ligne qui suit sert à signifier au compilateur que la classe "Piece" existe.
@@ -26,36 +40,72 @@ typedef enum
 // comporte des pointeurs vers la classe "Piece", et vice versa.
 class Piece;
 
+/**
+ * \class Porte
+ * \brief Cette classe sert à définir un objet Porte.
+ *
+ * Une porte est décrite par une couleur (rouge, vert, bleu ou jaune) et un pointeur
+ * vers une pièce du labyrinthe.
+ */
 class Porte
 {
 public:
-   //Constructeur, en argument la couleur de la porte ainsi que la pièce de destination
-   Porte(Couleur c, Piece * d);
 
-   //constructeur par défaut
+   /**
+    * \brief Construteur par défaut.
+    *
+    * \post Une instance de la classe Porte est initialisée.
+    */
    Porte();
 
-   //un destructeur qui ne fera rien
+   /**
+    * \brief Constructeur avec paramètres.
+    *
+    * \post Une instance de la classe Porte est initialisée.
+    */
+   Porte(Couleur c, Piece* d);
+
+   /**
+    * \brief Destructeur.
+    *
+    * \post L'instance de la Porte est détruite.
+    */
    virtual ~Porte();
 
-   //Constructeur de copie
+   /**
+    * \brief Constructeur de copie.
+    *
+    * \post Une copie profonde d'un objet Porte existant.
+    */
    Porte(const Porte&);
 
-   //Surcharge de l'opérateur =
+   /**
+    * \brief Surcharge de l'opérateur d'assignation =
+    *
+    * \post Une copie d'une Porte est retournée.
+    */
    const Porte& operator =(const Porte& source);
 
-   //accesseur de la couleur d'une porte
+   /**
+    * \brief Méthode accesseur pour la couleur d'une porte.
+    *
+    * \post La couleur de la porte.
+    */
    Couleur getCouleur() const;
 
-   //Accesseur de la piece de destination
-   Piece * getDestination() const;
+   /**
+    * \brief Méthode accesseur pour la pièce de destination d'une porte.
+    *
+    * \post Un pointeur vers la pièce de destination.
+    */
+   Piece* getDestination() const;
 
 private:
-   Piece * destination; // Vers où la porte mène.
-   Couleur color; // Couleur de la porte. Cette couleur spécifie en même temps
-   // quel est le joueur qui a le droit de franchir cette porte.
+   Piece* destination; /*!< Vers où la porte mène. */
+   Couleur color; /*!< Couleur de la porte. Cette couleur spécifie en même temps quel est le
+                       joueur qui a le droit de franchir cette porte. */
 };
 
-}
+} // namespace TP1
 
 #endif /* PORTE_H_ */

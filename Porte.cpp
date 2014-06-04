@@ -1,47 +1,68 @@
 /**
  * \file Porte.cpp
  * \brief Ce fichier contient une implantation des méthodes de la classe Porte
- * \author Étudiant 1, étudiant 2
+ * \author Éric Guillemette, Mathieu L'Écuyer
  * \version 0.1
  * \date juin 2014
- *
  */
 
 #include "Porte.h"
 
-using namespace std;
-
+/**
+ * \namespace TP1
+ *
+ * Espace de nommage regroupant les définitions du TP1.
+ */
 namespace TP1
 {
 
-//Constructeur, en argument la couleur de la porte ainsi que la pièce de destination
-Porte::Porte(Couleur c, Piece* d) :
-      color(c)
-{
-   destination = d;
-}
-
-//constructeur par défaut
+/**
+ * \fn Porte::Porte()
+ */
 Porte::Porte() :
-      color(Aucun)
+      destination(0), color(Aucun)
 {
-   destination = 0;
+
 }
 
-//un destructeur qui ne fera rien
+/**
+ * \fn Porte::Porte(Couleur c, Piece* d)
+ *
+ * \param[in] c : la couleur de la porte.
+ * \param[in] d : la pièce de destination.
+ */
+Porte::Porte(Couleur c, Piece* d) :
+      destination(d), color(c)
+{
+
+}
+
+/**
+ * \fn Porte::~Porte()
+ */
 Porte::~Porte()
 {
 
 }
 
-//Constructeur de copie
+/**
+ * \fn Porte::Porte(const Porte& source)
+ *
+ * \param[in] source : un objet Porte existant.
+ */
 Porte::Porte(const Porte& source) :
-      color(source.color)
+      destination(source.destination), color(source.color)
 {
-   destination = source.destination;
+
 }
 
-//Surcharge de l'opérateur =
+/**
+ * \fn const Porte& Porte::operator =(const Porte& source)
+ *
+ * \param[in] source : un objet Porte existant.
+ *
+ * \return L'objet courant contenant à présent les données de l'objet source.
+ */
 const Porte& Porte::operator =(const Porte& source)
 {
    if (this != &source)
@@ -53,16 +74,24 @@ const Porte& Porte::operator =(const Porte& source)
    return *this;
 }
 
-//accesseur de la couleur d'une porte
+/**
+ * \fn Couleur Porte::getCouleur() const
+ *
+ * \return color : la couleur d'une porte.
+ */
 Couleur Porte::getCouleur() const
 {
    return color;
 }
 
-//Accesseur de la piece de destination
+/**
+ * \fn Piece* Porte::getDestination() const
+ *
+ * \return destination : la pièce de destination d'une porte.
+ */
 Piece* Porte::getDestination() const
 {
    return destination;
 }
 
-}
+} // namespace TP1

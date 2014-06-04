@@ -1,31 +1,43 @@
 /**
  * \file ListePortes.cpp
  * \brief Ce fichier contient une implantation des méthodes de la classe ListePortes
- * \author Étudiant 1, étudiant 2
+ * \author Éric Guillemette, Mathieu L'Écuyer
  * \version 0.1
  * \date juin 2014
- *
  */
 
 #include "ListePortes.h"
 
+/**
+ * \namespace TP1
+ *
+ * Espace de nommage regroupant les définitions du TP1.
+ */
 namespace TP1
 {
 
-//constructeur par défaut
+/**
+ * \fn ListePortes::ListePortes()
+ */
 ListePortes::ListePortes() :
       acces(0), fin(0), nbPorte(0)
 {
 
 }
 
-//destructeur
+/**
+ * \fn ListePortes::~ListePortes()
+ */
 ListePortes::~ListePortes()
 {
    _detruire();
 }
 
-//Constructeur de copie
+/**
+ * \fn ListePortes::ListePortes(const ListePortes& source)
+ *
+ * \param[in] source : Un objet ListePortes existant.
+ */
 ListePortes::ListePortes(const ListePortes& source)
 {
    nbPorte = source.nbPorte;
@@ -39,7 +51,13 @@ ListePortes::ListePortes(const ListePortes& source)
       _copier(source.acces);
 }
 
-//Surcharge de l'opérateur =
+/**
+ * \fn const ListePortes& ListePortes::operator =(const ListePortes& source)
+ *
+ * \param[in] source : Un objet ListePortes existant.
+ *
+ * \return L'objet courant contenant à présent les données de l'objet source.
+ */
 const ListePortes& ListePortes::operator =(const ListePortes& source)
 {
    if (this != &source)
@@ -67,12 +85,11 @@ const ListePortes& ListePortes::operator =(const ListePortes& source)
    return *this;
 }
 
-//Cette fonction doit ajouter la porte p à la liste donnée.
-//Dans une liste de portes, plusieurs portes de couleurs différentes peuvent
-//donner accès à la même autre pièce. Par contre, deux portes de même couleur
-//ne peuvent pas relier deux mêmes pièces. Si une tentative d'ajouter une porte
-//menant à la même pièce et ayant la même couleur qu'une porte déjà présente
-//dans la liste est effectuée, il faut lancer une exception logic_error (doublon).
+/**
+ * \fn void ListePortes::ajoutePorte(Porte& p)
+ *
+ * \param[in] p : Un objet Porte.
+ */
 void ListePortes::ajoutePorte(Porte& p)
 {
    // on vérifie que la porte n'est pas déjà présente
@@ -110,34 +127,37 @@ void ListePortes::ajoutePorte(Porte& p)
    nbPorte++;
 }
 
-//Cette fonction doit retourner le nombre de portes présentes dans la liste de portes.
+/**
+ * \fn int ListePortes::tailleListePortes() const
+ *
+ * \return nbPorte : Un entier représentant le nombre de portes, donc la taille de la liste.
+ */
 int ListePortes::tailleListePortes() const
 {
    return nbPorte;
 }
 
-//Cette fonction doit supprimer la porte dont l'indice dans la liste est spécifié
-//par porteASupprimer dans la liste. Par exemple, si porteASupprimer vaut 0, il faut
-//supprimer la première porte de la liste. Si l'indice de la porte à supprimer
-//est invalide, c'est-à-dire s'il est négatif ou plus grand ou égal au nombre
-//de portes présentes dans la liste, il faut lancer une exception invalid_argument.
+/**
+ * \fn void ListePortes::supprimePorte(int porteASupprimer)
+ *
+ * \param[in] porteASupprimer : Un entier représentant l'indice de la porte à supprimer.
+ */
 void ListePortes::supprimePorte(int porteASupprimer)
 {
    // Précondition : la position de la porte à supprimer doit être valide
    if (porteASupprimer < 0 || porteASupprimer >= nbPorte)
    {
-      throw std::range_error("supprimePorte: Position de la porte invalide");
+      throw std::invalid_argument("supprimePorte: Position de la porte invalide");
    }
-
 
    // on met à jour les pointeurs avant de supprimer
    NoeudListePortes* trouve;
 
-   if (porteASupprimer == 0) //cas où la position de la porte = 0
+   if (porteASupprimer == 0) // cas où la position de la porte = 0
    {
       trouve = acces;
       acces = acces->suivant;
-      if (nbPorte != 1)  //s'il y avait juste un noeud, la ligne suivante serait illégale
+      if (nbPorte != 1)  // s'il y avait juste un noeud, la ligne suivante serait illégale
       {
          acces->precedent = 0;
       }
@@ -173,20 +193,29 @@ void ListePortes::supprimePorte(int porteASupprimer)
    nbPorte--;
 }
 
-//Retourne si la liste des portes est vide ?
+/**
+ * \fn bool ListePortes::estVideListePortes() const
+ *
+ * \return Un booléen VRAI si la liste est vide, FAUX sinon.
+ */
 bool ListePortes::estVideListePortes() const
 {
    return nbPorte == 0;
 }
 
-// elément dans la liste à une position donnée, la première position est en position 1;
-// Lance une exception invalid_argument si la position n'est pas correcte.
+/**
+ * \fn Porte ListePortes::elementAt(int pos) const
+ *
+ * \param[in] pos : La position (indice) de l'élément à récupérer dans la liste.
+ *
+ * \return L'objet Porte correspondant à la position donnée.
+ */
 Porte ListePortes::elementAt(int pos) const
 {
    // précondition : position doit être entre 1 et le nombre de portes
    if (pos < 1 || pos > nbPorte)
    {
-      throw std::range_error("elementAt: Position de la porte invalide");
+      throw std::invalid_argument("elementAt: Position de la porte invalide");
    }
 
    NoeudListePortes* courant = acces; // Position au début de la liste
@@ -201,6 +230,11 @@ Porte ListePortes::elementAt(int pos) const
    return courant->porte;
 }
 
+/**
+ * \fn void ListePortes::_copier(NoeudListePortes* sourceAcces)
+ *
+ * \param[in] sourceAcces : Un pointeur sur le début de la liste source.
+ */
 void ListePortes::_copier(NoeudListePortes* sourceAcces)
 {
    try
@@ -233,6 +267,9 @@ void ListePortes::_copier(NoeudListePortes* sourceAcces)
    }
 }
 
+/**
+ * \fn void ListePortes::_detruire()
+ */
 void ListePortes::_detruire()
 {
    NoeudListePortes* courant = acces;
@@ -244,4 +281,4 @@ void ListePortes::_detruire()
    }
 }
 
-}
+} // namespace TP1

@@ -1,11 +1,13 @@
 /**
  * \file ListePortes.h
  * \brief Ce fichier contient l'interface d'une liste de portes.
- * \author Mathieu L'Ecuyer
+ * \author Admin
  * \version 0.1
  * \date mai 2014
- * 
  */
+
+// Révision des commentaires avec balises Doxygen.
+// Fichier mis à jour par : Éric Guillemette, Mathieu L'Écuyer
 
 #ifndef LISTEPORTES_H_
 #define LISTEPORTES_H_
@@ -13,72 +15,151 @@
 #include <stdexcept>
 #include "Porte.h"
 
-
+/**
+ * \namespace TP1
+ *
+ * Espace de nommage regroupant les définitions du TP1.
+ */
 namespace TP1
 {
 
+/**
+ * \class ListePortes
+ * \brief Cette classe sert à définir une liste de portes.
+ *
+ * La liste de portes est implémentée dans une liste doublement chaînée.
+ * Elle est décrite par une porte et deux pointeurs, l'un vers le noeud
+ * suivant de la liste et l'autre vers le noeud précédent.
+ */
 class ListePortes
 {
 public:
-	//constructeur par défaut
+   /**
+    * \brief Constructeur par défaut.
+    *
+    * \post Une instance de la classe ListePortes est initialisée.
+    */
 	ListePortes();
 
-	//destructeur
+	/**
+    * \brief Destructeur.
+    *
+    * \post L'instance de ListePortes est détruite.
+    */
 	virtual ~ListePortes();
 
-	//Constructeur de copie
+	/**
+    * \brief Constructeur de copie.
+    *
+    * \post Une copie profonde d'un objet ListePortes existant est initialisée.
+    */
 	ListePortes(const ListePortes&);
 
-	//Surcharge de l'opérateur =
+	/**
+    * \brief Surcharge de l'opérateur d'assignation =
+    *
+    * \post Une copie de ListePortes est retournée.
+    */
 	const ListePortes& operator =(const ListePortes& source);
 
-	//Cette fonction doit ajouter la porte p à la liste donnée.
-	//Dans une liste de portes, plusieurs portes de couleurs différentes peuvent
-	//donner accès à la même autre pièce. Par contre, deux portes de même couleur
-	//ne peuvent pas relier deux mêmes pièces. Si une tentative d'ajouter une porte
-	//menant à la même pièce et ayant la même couleur qu'une porte déjà présente
-	//dans la liste est effectuée, il faut lancer une exception logic_error (doublon).
+	/**
+    * \brief Cette méthode doit ajouter la Porte p à la ListePortes.
+    *
+    * \pre p ne doit pas avoir la même couleur et la même destination
+    *      qu'une porte déjà présente dans la liste de portes.
+    *
+    * \post L'objet p est ajouté à la liste de portes.
+    *
+    * \exception logic_error : si tentative d'ajouter une porte déjà présente (doublon).
+    */
 	void ajoutePorte(Porte& p);
 
-	//Cette fonction doit retourner le nombre de portes présentes dans la liste de portes.
+	/**
+    * \brief Cette méthode retourne le nombre de portes présentes dans la ListePortes.
+    *
+    * \post La taille de la liste est retournée, soit le nombre de portes.
+    */
 	int tailleListePortes() const;
 
-	//Cette fonction doit supprimer la porte dont l'indice dans la liste est spécifié
-	//par porteASupprimer dans la liste. Par exemple, si porteASupprimer vaut 0, il faut
-	//supprimer la première porte de la liste. Si l'indice de la porte à supprimer
-	//est invalide, c'est-à-dire s'il est négatif ou plus grand ou égal au nombre
-	//de portes présentes dans la liste, il faut lancer une exception invalid_argument.
+	/**
+    * \brief Cette méthode supprime la porte à l'indice spécifié par porteASupprimer.
+    *
+    * \pre L'indice de la porte à supprimer doit être plus grand ou égal à 0.
+    * \pre L'indice de la porte à supprimer doit être plus petit que le nombre de portes.
+    *
+    * \post La porte présente à l'indice porteASupprimer est supprimée de la liste de portes.
+    *
+    * \exception invalid_argument : si l'indice est négatif ou plus grand ou égal au nombre
+    *            de portes présentes dans la liste.
+    */
 	void supprimePorte(int porteASupprimer);
 
-	//Retourne si la liste des portes est vide ?
+	/**
+    * \brief Cette méthode vérifie si la liste de portes est vide.
+    *
+    * \post VRAI est retourné si la liste est vide, FAUX sinon.
+    */
 	bool estVideListePortes() const;
 
-	// elément dans la liste à une position donnée,  la première position est en position 1;
-	// Lance une exception invalid_argument si la position n'est pas correcte.
+	/**
+    * \brief Cette méthode retourne l'élément Porte dans la liste à une position donnée.
+    *
+    * \pre pos : la première position est en position 1.
+    *
+    * \post La porte à la position pos est retournée.
+    *
+    * \exception invalid_argument : si la position donnée en paramètre est invalide.
+    */
 	Porte elementAt(int pos) const;
 
 private:
-	class NoeudListePortes //noeud typique d'une liste doublement chaînée
+	/**
+    * \class NoeudListePortes
+    *
+    * \brief Classe interne représentant un noeud typique.
+    *
+    * Cette classe représente un noeud typique pour implémenter une liste doublement chaînée.
+    */
+	class NoeudListePortes
 	{
 		public:
-			Porte porte; // La porte contenue dans ce noeud de la liste chaînée.
-			NoeudListePortes *suivant; // Un pointeur vers le noeud suivant de la liste. NULL s'il s'agit du dernier noeud.
-			NoeudListePortes *precedent;// Un pointeur vers le noeud précédent de la liste. NULL s'il s'agit du premier noeud.
+			Porte porte; /*!< La porte contenue dans ce noeud de la liste. */
+			NoeudListePortes* suivant; /*!< Un pointeur vers le noeud suivant de la liste.
+			                                NULL s'il s'agit du dernier noeud. */
+			NoeudListePortes* precedent; /*!< Un pointeur vers le noeud précédent de la liste.
+                                           NULL s'il s'agit du premier noeud. */
 
-			explicit NoeudListePortes(const Porte& porte, NoeudListePortes *next_ptr = 0,
-			                          NoeudListePortes *prev_ptr = 0) :
+			/**
+          * \brief Constructeur de la classe NoeudListePortes.
+          *
+          * \post Un noeud typique est initialisé.
+          */
+			explicit NoeudListePortes(const Porte& porte, NoeudListePortes* next_ptr = 0,
+			                          NoeudListePortes* prev_ptr = 0) :
 			                          porte(porte), suivant(next_ptr), precedent(prev_ptr){}
 	};
 
-   NoeudListePortes *acces;// pointeur sur le début de la liste des portes
-	NoeudListePortes *fin;// pointeur sur la fin de la liste des portes
-	int nbPorte; // nombre de portes dans la liste des portes
+   NoeudListePortes* acces; /*!< Pointeur sur le début de la liste des portes. */
+	NoeudListePortes* fin; /*!< Pointeur sur la fin de la liste des portes. */
+	int nbPorte; /*!< Nombre de portes dans la liste des portes. */
 
 	// Méthodes privées
+
+	/**
+    * \brief Cette méthode privée sert à copier une liste de portes.
+    *
+    * \post Une copie profonde d'une liste de portes est créée.
+    */
 	void _copier(NoeudListePortes* sourceAcces);
+
+	/**
+    * \brief Cette méthode privée sert à détruire une liste de portes.
+    *
+    * \post La liste de portes est détruite.
+    */
 	void _detruire();
 };
 
-}
+} // namespace TP1
 
 #endif /* LISTEPORTES_H_ */

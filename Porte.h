@@ -7,7 +7,7 @@
  */
 
 // Révision des commentaires avec balises Doxygen.
-// Mis à jour par : Éric Guillemette, Mathieu L'Écuyer
+// Fichier mis à jour par : Éric Guillemette, Mathieu L'Écuyer
 
 #ifndef PORTE_H_
 #define PORTE_H_
@@ -50,7 +50,6 @@ class Piece;
 class Porte
 {
 public:
-
    /**
     * \brief Construteur par défaut.
     *
@@ -75,7 +74,7 @@ public:
    /**
     * \brief Constructeur de copie.
     *
-    * \post Une copie profonde d'un objet Porte existant.
+    * \post Une copie profonde d'un objet Porte existant est initialisée.
     */
    Porte(const Porte&);
 
@@ -89,14 +88,14 @@ public:
    /**
     * \brief Méthode accesseur pour la couleur d'une porte.
     *
-    * \post La couleur de la porte.
+    * \post La couleur de la porte est retournée.
     */
    Couleur getCouleur() const;
 
    /**
     * \brief Méthode accesseur pour la pièce de destination d'une porte.
     *
-    * \post Un pointeur vers la pièce de destination.
+    * \post Le pointeur vers la pièce de destination est retourné.
     */
    Piece* getDestination() const;
 

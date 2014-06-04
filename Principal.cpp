@@ -71,28 +71,29 @@ int main()
 		cout << "\nLabyrinthe jaune chargé.\n";
 		entree.close();
 
-		cout << "\nLe joueur rouge peut solutionner le labyrinthe en "
-				<< lab.solutionner(Rouge) << " déplacements.\n";
-		cout << "\nLe joueur vert peut solutionner le labyrinthe en "
-				<< lab.solutionner(Vert) << " déplacements.\n";
-		cout << "\nLe joueur bleu peut solutionner le labyrinthe en "
-				<< lab.solutionner(Bleu) << " déplacements.\n";
-		cout << "\nLe joueur jaune peut solutionner le labyrinthe en "
-				<< lab.solutionner(Jaune) << " déplacements.\n";
+		int nbR = lab.solutionner(Rouge);
+		int nbV = lab.solutionner(Vert);
+		int nbB = lab.solutionner(Bleu);
+		int nbJ = lab.solutionner(Jaune);
+
+		nbR == 0 ? cout << "\nLe joueur rouge ne peut solutionner le labyrinthe" : cout << "\nLe joueur rouge peut solutionner le labyrinthe en " << nbR << " déplacements.\n";
+		nbV == 0 ? cout << "\nLe joueur vert ne peut solutionner le labyrinthe" : cout << "\nLe joueur vert peut solutionner le labyrinthe en " << nbV << " déplacements.\n";
+		nbB == 0 ? cout << "\nLe joueur bleu ne peut solutionner le labyrinthe" : cout << "\nLe joueur bleu peut solutionner le labyrinthe en " << nbB << " déplacements.\n";
+		nbJ == 0 ? cout << "\nLe joueur jaune ne peut solutionner le labyrinthe" : cout << "\nLe joueur jaune peut solutionner le labyrinthe en " << nbJ << " déplacements.\n";
 
 		Couleur LeGagnant = lab.trouveGagnant();
 		switch (LeGagnant)
 		{
 		case 0:
-			cout << endl << "Le joureur gagnant: Rouge" << endl << endl; break;
+			cout << endl << "\nLe joureur gagnant: Rouge" << endl << endl; break;
 		case 1:
-			cout << endl << "Le joureur gagnant: Vert" << endl << endl; break;
+			cout << endl << "\nLe joureur gagnant: Vert" << endl << endl; break;
 		case 2:
-			cout << endl << "Le joureur gagnant: Bleu" << endl << endl; break;
+			cout << endl << "\nLe joureur gagnant: Bleu" << endl << endl; break;
 		case 3:
-			cout << endl << "Le joureur gagnant: Jaune" << endl << endl; break;
+			cout << endl << "\nLe joureur gagnant: Jaune" << endl << endl; break;
 		default:
-			cout << endl << "Le joureur gagnant: aucun!!" << endl << endl; break;
+			cout << endl << "\nLe joureur gagnant: aucun!!" << endl << endl; break;
 		}
 
 		//Simulation de l'appel de la méthode cheminLabyrinthe() puis affichage du chemin retourné.

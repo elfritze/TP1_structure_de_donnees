@@ -260,6 +260,19 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 	//Retourne le nombre de dépalcements requis pour qu'un joueur traverse le labyrinthe.
 	int Labyrinthe::solutionner(Couleur joueur)
 	{
+		//On reset le chemin pour qu'aucune piece ne soit parcourue
+		dernier->piece.setParcourue(false);
+		NoeudListePieces *videur = 0;
+		videur = dernier->suivant;
+		while(videur!=dernier)
+		{
+			videur->piece.setParcourue(false);
+			videur=videur->suivant;
+		}
+		videur = 0;
+		delete videur;
+		
+		//Début de l'algoritme de solution
 		bool done = false;
 		int distance = 0;
 		string nomPiece = "";
@@ -274,7 +287,7 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 			if(courant->getNom() == arrivee->getNom())
 				done = true;
 
-			for (int i = 1;i < courant->getPortes().tailleListePortes(); i ++){
+			for (int i = 1;i <= courant->getPortes().tailleListePortes(); i ++){
 
 				temp  = courant->getPortes().elementAt(i).getDestination();
 				if(!temp->getParcourue() && courant->getPortes().elementAt(i).getCouleur()==joueur)
@@ -288,13 +301,13 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 			
 			for (NoeudListePieces * i = dernier->suivant; i != dernier; i = i->suivant )
 			{
-				for (int j = 1;j < i->piece.getPortes().tailleListePortes(); j ++){
+				for (int j = 1;j <= i->piece.getPortes().tailleListePortes(); j ++){
 
 					temp  = i->piece.getPortes().elementAt(j).getDestination();
-					if(i->piece.getPortes().elementAt(j).getCouleur()==joueur && temp==courant && !temp->getParcourue())
+					if(i->piece.getPortes().elementAt(j).getCouleur()==joueur && temp==courant && !i->piece.getParcourue())
 					{
 						temp->setParcourue(true);
-						pieces.enfilePiece(temp->getNom(),distance+1);
+						pieces.enfilePiece(i->piece.getNom(),distance+1);
 					}
 
 				}
@@ -302,7 +315,10 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 			
 		}while(!pieces.estVideFile() && !done);
 
-		return 1;
+		if(done)
+			return distance;
+		else
+			return 0;
 	}
 
 	//TODO
@@ -317,7 +333,27 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 	//Appelle 4 fois la méthode solutionner pour trouver le joueur gagnant.
 	Couleur Labyrinthe::trouveGagnant()
 	{
-		return Rouge;
+		int nbR = solutionner(Rouge);
+		int nbV = solutionner(Vert);
+		int nbB = solutionner(Bleu);
+		int nbJ = solutionner(Jaune);
+		int min = 9999;
+
+		nbR < min && nbR != 0 ? min= nbR : min = min;
+		nbV < min && nbV != 0 ? min= nbV : min = min;
+		nbB < min && nbB != 0 ? min= nbB : min = min;
+		nbJ < min && nbJ != 0 ? min= nbJ : min = min;
+
+		if(min == nbR)
+			return Rouge;
+		else if(min==nbV)
+			return Vert;
+		else if(min==nbB)
+			return Bleu;
+		else if(min==nbJ)
+			return Jaune;
+		else
+			return Couleur();
 	}
 
 	//TODO
@@ -331,6 +367,10 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 		//On parcour la liste pour vérifier si une piece porte un même nom
 		NoeudListePieces *courant = 0;
 		courant = dernier->suivant;
+
+		if(dernier->piece.getNom() == nom)
+			return dernier;
+
 		while(courant!=dernier)
 		{
 			if(courant->piece.getNom() == nom)

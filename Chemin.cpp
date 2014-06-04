@@ -162,6 +162,8 @@ namespace TP1
 			delete courant;
 			courant = temp;
 		}
+		debut = 0;
+		delete debut;
 		
 	}
 

@@ -38,9 +38,10 @@ namespace TP1
 		if (debut!=0)
 			_detruire();
 
+		//On copie le début
 		debut = source.debut;
 		if(source.debut!=0)
-			_copier(source.debut);
+			_copier(source.debut); //On appelle la méthode copier pour copier le reste de la liste chainée à partir du début.
 
 		return (*this);
 	}
@@ -52,25 +53,32 @@ namespace TP1
 		NoeudChemin * nouveau = new NoeudChemin(nomPiece,distanceDuDebut);
 		NoeudChemin * courant = debut;
 		NoeudChemin * pred = 0;
+
+		// On parcoure la liste jusqu'à la fin
 		while(courant != 0)
 		{
 			pred = courant;
 			courant = courant->suivant;
 		}
+
+		//Si la liste est vide on insere au début
 		if(debut==0)
 			debut = nouveau;
 		else
-			pred->suivant = nouveau;
+			pred->suivant = nouveau; // Sinon on ajoute à la fin
 	}
 
 	//Supprime une pièce d'un chemin, dont l'indice dans la liste chaînée,commençant par 1,
 	//est spécifié par numPiece. La méthode doit lancer une exception invalid_argument si l'indice est invalide.
 	void Chemin::retirePiece(int numPiece)
 	{
+		//Vérification
 		if(numPiece >= 1 && numPiece <= tailleChemin()){
 			int i = 1;
 			NoeudChemin * courant = debut;
 			NoeudChemin * precedent = courant;
+
+			//On loop n fois pour atteindre la piece désirée
 			while(i < numPiece)
 			{
 				precedent = courant;
@@ -78,14 +86,15 @@ namespace TP1
 				i++;
 			}
 
+			//Si le noeud désiré est le premier on réassigne le début au suivant du début.
 			if(debut==courant)
 					debut=courant->suivant;
 			else
-				precedent->suivant=courant->suivant;
+				precedent->suivant=courant->suivant;// Sinon on associe le suivant du noeud précédant le noeud désiré au noeud suivant du noeud désiré
 
+			//On se débarasse du noeud désiré
 			courant->suivant = 0;
 			delete courant;
-			int swag =0 ;
 		}else
 			throw std::invalid_argument("L'indice est invalide");
 	}

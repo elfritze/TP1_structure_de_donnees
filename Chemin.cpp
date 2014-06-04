@@ -50,8 +50,17 @@ namespace TP1
 	void Chemin::ajoutePiece(const std::string &nomPiece, int distanceDuDebut)
 	{
 		NoeudChemin * nouveau = new NoeudChemin(nomPiece,distanceDuDebut);
-		nouveau->suivant=debut;
-		debut = nouveau;
+		NoeudChemin * courant = debut;
+		NoeudChemin * pred = 0;
+		while(courant != 0)
+		{
+			pred = courant;
+			courant = courant->suivant;
+		}
+		if(debut==0)
+			debut = nouveau;
+		else
+			pred->suivant = nouveau;
 	}
 
 	//Supprime une pièce d'un chemin, dont l'indice dans la liste chaînée,commençant par 1,
@@ -68,10 +77,15 @@ namespace TP1
 				courant = courant->suivant;
 				i++;
 			}
-			precedent->suivant=courant->suivant;
-			courant->suivant=0;
-			delete courant;
 
+			if(debut==courant)
+					debut=courant->suivant;
+			else
+				precedent->suivant=courant->suivant;
+
+			courant->suivant = 0;
+			delete courant;
+			int swag =0 ;
 		}else
 			throw std::invalid_argument("L'indice est invalide");
 	}

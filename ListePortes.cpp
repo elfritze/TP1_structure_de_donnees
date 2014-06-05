@@ -82,7 +82,7 @@ const ListePortes& ListePortes::operator =(const ListePortes& source)
       }
    }
 
-   return *this;
+   return (*this);
 }
 
 /**

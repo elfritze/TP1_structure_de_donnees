@@ -50,10 +50,10 @@ Porte::~Porte()
  *
  * \param[in] source : Un objet Porte existant.
  */
-Porte::Porte(const Porte& source) :
-      destination(source.destination), color(source.color)
+Porte::Porte(const Porte& source)
 {
-
+   destination = source.destination;
+   color = source.color;
 }
 
 /**
@@ -67,11 +67,11 @@ const Porte& Porte::operator =(const Porte& source)
 {
    if (this != &source)
    {
-      color = source.color;
       destination = source.destination;
+      color = source.color;
    }
 
-   return *this;
+   return (*this);
 }
 
 /**

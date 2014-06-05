@@ -13,15 +13,15 @@ namespace TP1
 {
 
 	//constructeur par défaut
-	Piece::Piece() : parcourue(false)
+	Piece::Piece() : portes(ListePortes()), parcourue(false)
 	{
-		portes = ListePortes();
+
 	}
 
 	//Surcharge du constructeur, le nom de la pièce en argument
-	Piece::Piece(const std::string & s) : nom(s) , parcourue(false)
+	Piece::Piece(const std::string& s) : portes(ListePortes()), parcourue(false), nom(s)
 	{
-		portes = ListePortes();
+
 	}
 
 	//destructeur
@@ -33,15 +33,22 @@ namespace TP1
 	//constructeur de copie
 	Piece::Piece(const Piece& p)
 	{
-		nom = p.getNom();
-		parcourue = p.getParcourue();
-		portes = p.portes;
+	   portes = p.portes;
+	   parcourue = p.parcourue;
+	   nom = p.nom;
 	}
 
 	//Surcharge de l'opérateur =
 	const Piece& Piece::operator =(const Piece& source)
 	{
-		return Piece(source);
+	   if (this != &source)
+	   {
+	      portes = source.portes;
+	      parcourue = source.parcourue;
+         nom = source.nom;
+	   }
+
+		return (*this);
 	}
 
 	//Accesseur du nom d'une pièce

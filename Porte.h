@@ -35,14 +35,14 @@ typedef enum
    Aucun /*!< Valeur spéciale utilisée dans la fonction "trouveGagnant". */
 } Couleur;
 
-// La ligne qui suit sert à signifier au compilateur que la classe "Piece" existe.
-// Nous n'avons pas le choix de procéder de cette manière, car la structure "Porte"
-// comporte des pointeurs vers la classe "Piece", et vice versa.
+// La ligne qui suit sert à signifier au compilateur que la classe Piece existe.
+// Nous n'avons pas le choix de procéder de cette manière, car la structure Porte
+// comporte des pointeurs vers la classe Piece, et vice versa.
 class Piece;
 
 /**
  * \class Porte
- * \brief Cette classe sert à définir un objet Porte.
+ * \brief Cette classe sert à définir une porte.
  *
  * Une porte est décrite par une couleur (rouge, vert, bleu ou jaune) et un pointeur
  * vers une pièce du labyrinthe.

@@ -28,7 +28,7 @@ namespace TP1
 
 /**
  * \class Piece
- * \brief Cette classe sert à définir un objet Piece.
+ * \brief Cette classe sert à définir une piece.
  *
  * Une pièce est décrite par une liste de portes, un nom (chaîne de caractères) qui doit être
  * unique pour chaque pièce et un booléen pour indiquer si la pièce a déjà été parcourue ou non.

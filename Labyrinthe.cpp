@@ -37,7 +37,7 @@ Labyrinthe::~Labyrinthe()
 /**
  * \fn Labyrinthe::Labyrinthe(const Labyrinthe& l)
  *
- * \param[in] l Un objet Labyrinthe existant.
+ * \param[in] l : Un objet Labyrinthe existant.
  */
 Labyrinthe::Labyrinthe(const Labyrinthe& l)
 {
@@ -50,7 +50,7 @@ Labyrinthe::Labyrinthe(const Labyrinthe& l)
 /**
  * \fn const Labyrinthe& Labyrinthe::operator =(const Labyrinthe& source)
  *
- * \param[in] source Un objet Labyrinthe existant.
+ * \param[in] source : Un objet Labyrinthe existant.
  *
  * \return L'objet courant contenant à présent les données de l'objet source.
  */
@@ -71,8 +71,8 @@ const Labyrinthe& Labyrinthe::operator =(const Labyrinthe& source)
 
 /**
  * \fn void Labyrinthe::chargeLabyrinthe(Couleur couleur, std::ifstream &entree)
- * \param[in] couleur La couleur du joueur auquel le labyrinthe chargé s'applique
- * \param[in] entree Fichier contenant la définition du labyrinthe
+ * \param[in] couleur : La couleur du joueur auquel le labyrinthe chargé s'applique
+ * \param[in] entree : Fichier contenant la définition du labyrinthe
  */
 void Labyrinthe::chargeLabyrinthe(Couleur couleur, std::ifstream &entree)
 {
@@ -210,7 +210,7 @@ void Labyrinthe::chargeLabyrinthe(Couleur couleur, std::ifstream &entree)
 /**
  * \fn void Labyrinthe::ajoutePieceLabyrinthe(Piece &p)
  *
- * \param[in] p Un objet pièce à ajouter au labyrinthe.
+ * \param[in] p : Un objet pièce à ajouter au labyrinthe.
  */
 void Labyrinthe::ajoutePieceLabyrinthe(Piece &p)
 {
@@ -246,7 +246,7 @@ void Labyrinthe::ajoutePieceLabyrinthe(Piece &p)
 /**
  * \fn int Labyrinthe::solutionner(Couleur joueur)
  *
- * \param[in] joueur La couleur du joueur.
+ * \param[in] joueur : La couleur du joueur.
  *
  * \return Un entier représentant le nombre de déplacements requis pour que le joueur traverse
  *         le labyrinthe.
@@ -354,7 +354,7 @@ int Labyrinthe::solutionner(Couleur joueur)
 /**
  * \fn Couleur Labyrinthe::trouveGagnant()
  *
- * \return Retourne la couleur du joueur gagnant.
+ * \return La couleur du joueur gagnant.
  */
 Couleur Labyrinthe::trouveGagnant()
 {
@@ -398,7 +398,7 @@ Couleur Labyrinthe::trouveGagnant()
 /**
  * \fn Chemin Labyrinthe::cheminLabyrinthe(Couleur joueur)
  *
- * \param[in] joueur La couleur du joueur.
+ * \param[in] joueur : La couleur du joueur.
  *
  * \return Le chemin pris par le joueur pour solutionner le labyrinthe.
  */
@@ -426,11 +426,11 @@ Chemin Labyrinthe::cheminLabyrinthe(Couleur joueur)
 
 /**
  * \fn Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
- * \param[in] couleur Couleur de la porte à ajouter
- * \param[in] i1 Coordonnée de la pièce 1
- * \param[in] j1 Coordonnée de la pièce 1
- * \param[in] i2 Coordonnée de la pièce 2
- * \param[in] j2 Coordonnée de la pièce 2
+ * \param[in] couleur : Couleur de la porte à ajouter
+ * \param[in] i1 : Coordonnée de la pièce 1
+ * \param[in] j1 : Coordonnée de la pièce 1
+ * \param[in] i2 : Coordonnée de la pièce 2
+ * \param[in] j2 : Coordonnée de la pièce 2
  */
 void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 {
@@ -460,7 +460,7 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 /**
  * \fn Labyrinthe::NoeudListePieces *Labyrinthe::trouvePiece(std::string &nom) const
  *
- * \param[in] nom Le nom de la pièce à trouver.
+ * \param[in] nom : Le nom de la pièce à trouver.
  *
  * \return L'adresse du noeud de la liste de pièces qui correspond à la pièce portant le nom.
  */
@@ -494,7 +494,7 @@ Labyrinthe::NoeudListePieces *Labyrinthe::trouvePiece(std::string &nom) const
 /**
  * \fn void Labyrinthe::placeDepart(std::string& nom)
  *
- * \param[in] nom Le nom de la pièce de départ.
+ * \param[in] nom : Le nom de la pièce de départ.
  */
 void Labyrinthe::placeDepart(std::string& nom)
 {
@@ -507,7 +507,7 @@ void Labyrinthe::placeDepart(std::string& nom)
 /**
  * \fn void Labyrinthe::placeArrivee(std::string& nom)
  *
- * \param[in] nom Le nom de la pièce d'arrivée.
+ * \param[in] nom : Le nom de la pièce d'arrivée.
  */
 void Labyrinthe::placeArrivee(std::string& nom)
 {
@@ -520,7 +520,7 @@ void Labyrinthe::placeArrivee(std::string& nom)
 /**
  * \fn void Labyrinthe::_copier(NoeudListePieces * sn)
  *
- * \param[in] sn Un pointeur sur le début de la liste source.
+ * \param[in] sn : Un pointeur sur le début de la liste source.
  */
 void Labyrinthe::_copier(NoeudListePieces * sn)
 {

@@ -73,8 +73,8 @@ const Chemin& Chemin::operator=(const Chemin& source)
 /**
  * \fn void Chemin::ajoutePiece(const std::string &nomPiece, int distanceDuDebut)
  *
- * \param[in] nomPiece : le nom de la pièce à ajouter à la file.
- * \param[in] distanceDuDebut : le nombre de déplacement depuis le début du labyrinthe.
+ * \param[in] nomPiece : Le nom de la pièce à ajouter à la file.
+ * \param[in] distanceDuDebut : Le nombre de déplacement depuis le début du labyrinthe.
  */
 void Chemin::ajoutePiece(const std::string &nomPiece, int distanceDuDebut)
 {
@@ -99,7 +99,7 @@ void Chemin::ajoutePiece(const std::string &nomPiece, int distanceDuDebut)
 /**
  * \fn void Chemin::retirePiece(int numPiece)
  *
- * \param[in] numPiece : l'indice de la pièce à supprimer dans la chaîne.
+ * \param[in] numPiece : L'indice de la pièce à supprimer dans la chaîne.
  */
 void Chemin::retirePiece(int numPiece)
 {

@@ -76,7 +76,7 @@ public:
     *
     * \post La pièce présente à l'indice numPiece est supprimée du chemin.
     *
-    * \exception invalid_argument : si l'indice est invalide.
+    * \exception invalid_argument : Si l'indice est invalide.
     */
 	void retirePiece(int numPiece);
 

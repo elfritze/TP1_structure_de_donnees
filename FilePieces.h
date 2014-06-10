@@ -27,7 +27,7 @@ namespace TP1
 
 /**
  * \class FilePieces
- * \brief Cette classe sert à définir une file de Pieces.
+ * \brief Cette classe sert à définir une file de pièces.
  *
  * Une file de pièces est définie par un chemin et sert à résoudre la méthode solutionLabyrinthe()
  * de la classe Labyrinthe. Les fonctions qui permettent d'opérer la file seront implémentées tout
@@ -74,10 +74,12 @@ public:
    /**
     * \brief Retire une pièce du début d'une file.
     *
+    * \pre La file de pièces ne doit pas être vide.
+    *
     * \post Le nom de la pièce retirée est placé dans nomPieceRetiree et sa distance du début
     *       est placé dans distanceDuDebut.
     *
-    * \exception logic_error : si la file est vide.
+    * \exception logic_error : Si la file est vide.
     */
    void defilePiece(std::string & nomPieceRetiree, int &distanceDuDebut);
 

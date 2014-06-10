@@ -58,8 +58,8 @@ const FilePieces& FilePieces::operator =(const FilePieces& source)
 /**
  * \fn void FilePieces::enfilePiece(const std::string &nomPiece, int distanceDuDebut)
  *
- * \param[in] nomPiece : le nom de la pièce à ajouter à la file.
- * \param[in] distanceDuDebut : le nombre de déplacement depuis le début du labyrinthe.
+ * \param[in] nomPiece : Le nom de la pièce à ajouter à la file.
+ * \param[in] distanceDuDebut : Le nombre de déplacement depuis le début du labyrinthe.
  */
 void FilePieces::enfilePiece(const std::string &nomPiece, int distanceDuDebut)
 {
@@ -70,8 +70,8 @@ void FilePieces::enfilePiece(const std::string &nomPiece, int distanceDuDebut)
 /**
  * \fn void FilePieces::defilePiece(std::string & nomPieceRetiree, int &distanceDuDebut)
  *
- * \param[in] nomPieceRetiree : le nom de la pièce à retirer de la file.
- * \param[in] distanceDuDebut : le nombre de déplacement depuis le début du labyrinthe.
+ * \param[in] nomPieceRetiree : Le nom de la pièce à retirer de la file.
+ * \param[in] distanceDuDebut : Le nombre de déplacement depuis le début du labyrinthe.
  */
 void FilePieces::defilePiece(std::string & nomPieceRetiree, int &distanceDuDebut)
 {

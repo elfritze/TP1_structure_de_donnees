@@ -1,10 +1,9 @@
 /**
  * \file Principal.cpp
  * \brief Ce fichier contient un main pour tester le labyrinthe.
- * \author Admin, Étudiant 1, étudiant 2
+ * \author Admin, Éric Guillemette, Mathieu L'Écuyer
  * \version 0.1
  * \date mai 2014
- * 
  */
 
 //Fichiers à compléter pour faire d'autres tests.
@@ -14,6 +13,12 @@
 using namespace std;
 using namespace TP1;
 
+/**
+ * \fn int main()
+ * \brief Fonction principale pour tester le labyrinthe.
+ *
+ * \return 0 - Arrêt normal du programme.
+ */
 int main()
 {
 	try
@@ -85,15 +90,15 @@ int main()
 		switch (LeGagnant)
 		{
 		case 0:
-			cout << endl << "\nLe joureur gagnant: Rouge" << endl << endl; break;
+			cout << endl << "\nLe joueur gagnant : Rouge" << endl << endl; break;
 		case 1:
-			cout << endl << "\nLe joureur gagnant: Vert" << endl << endl; break;
+			cout << endl << "\nLe joueur gagnant : Vert" << endl << endl; break;
 		case 2:
-			cout << endl << "\nLe joureur gagnant: Bleu" << endl << endl; break;
+			cout << endl << "\nLe joueur gagnant : Bleu" << endl << endl; break;
 		case 3:
-			cout << endl << "\nLe joureur gagnant: Jaune" << endl << endl; break;
+			cout << endl << "\nLe joueur gagnant : Jaune" << endl << endl; break;
 		default:
-			cout << endl << "\nLe joureur gagnant: aucun!!" << endl << endl; break;
+			cout << endl << "\nAucun joueur gagnant !" << endl << endl; break;
 		}
 
 		//Simulation de l'appel de la méthode cheminLabyrinthe() puis affichage du chemin retourné.
@@ -113,8 +118,8 @@ int main()
 		std::cout << std::endl << "Chemin Jaune : " << std::endl;
 		nomduchemin = lab.cheminLabyrinthe(TP1::Jaune);
 		nomduchemin.afficheChemin();
-		string str;
-		getline(cin, str);
+		//string str;
+		//getline(cin, str);
 
 	} catch (exception & e)
 	{

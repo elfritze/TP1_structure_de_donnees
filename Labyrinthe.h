@@ -33,7 +33,7 @@ namespace TP1
 
 /**
  * \class Labyrinthe
- * \brief Cette classe sert à définir un labyrinthe utilisant une liste chaînée circulaire.
+ * \brief Cette classe sert à définir un labyrinthe.
  *
  * Un labyrinthe utilise une liste chaînée circulaire de pièces. Il est décrit par un pointeur vers
  * la dernière pièce de la liste, un pointeur vers la pièce de départ et un pointeur vers la pièce
@@ -128,7 +128,7 @@ private:
     *
     * \post Le pointeur depart pointe à présent sur la pièce de départ.
     *
-    * \exception logic_error Si aucune pièce du labyrinthe ne porte le nom spécifié.
+    * \exception logic_error : Si aucune pièce du labyrinthe ne porte le nom spécifié.
     */
 	void placeDepart(std::string& nom);
 
@@ -138,7 +138,7 @@ private:
     *
     * \post Le pointeur arrivee pointe à présent sur la pièce d'arrivée.
     *
-    * \exception logic_error Si aucune pièce du labyrinthe ne porte le nom spécifié.
+    * \exception logic_error : Si aucune pièce du labyrinthe ne porte le nom spécifié.
     */
 	void placeArrivee(std::string& nom);
 
@@ -173,8 +173,8 @@ private:
     *
     * \post L'adresse du noeud contenant la pièce trouvée est retournée.
     *
-    * \exception invalid_argument Si le nom de la pièce est vide.
-    * \exception logic_error Si la pièce est introuvable.
+    * \exception invalid_argument : Si le nom de la pièce est vide.
+    * \exception logic_error : Si la pièce est introuvable.
     */
 	NoeudListePieces *trouvePiece(std::string &nom) const;
 

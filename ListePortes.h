@@ -70,7 +70,7 @@ public:
     *
     * \post L'objet p est ajouté à la liste de portes.
     *
-    * \exception logic_error : si tentative d'ajouter une porte déjà présente (doublon).
+    * \exception logic_error : Si tentative d'ajouter une porte déjà présente (doublon).
     */
 	void ajoutePorte(Porte& p);
 
@@ -89,7 +89,7 @@ public:
     *
     * \post La porte présente à l'indice porteASupprimer est supprimée de la liste de portes.
     *
-    * \exception invalid_argument : si l'indice est négatif ou plus grand ou égal au nombre
+    * \exception invalid_argument : Si l'indice est négatif ou plus grand ou égal au nombre
     *            de portes présentes dans la liste.
     */
 	void supprimePorte(int porteASupprimer);
@@ -104,11 +104,11 @@ public:
 	/**
     * \brief Cette méthode retourne l'élément Porte dans la liste à une position donnée.
     *
-    * \pre pos : la première position est en position 1.
+    * \pre pos : La première position est en position 1.
     *
     * \post La porte à la position pos est retournée.
     *
-    * \exception invalid_argument : si la position donnée en paramètre est invalide.
+    * \exception invalid_argument : Si la position donnée en paramètre est invalide.
     */
 	Porte elementAt(int pos) const;
 

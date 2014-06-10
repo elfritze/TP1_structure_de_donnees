@@ -48,7 +48,7 @@ public:
     *
     * \post Une instance de la classe Piece est initialisée.
     */
-   Piece(const std::string& s);
+   Piece(const std::string & s);
 
    /**
     * \brief Destructeur.
@@ -97,7 +97,7 @@ public:
     *
     * \post La liste de portes est retournée.
     */
-   const ListePortes& getPortes() const;
+   const ListePortes & getPortes() const;
 
    /**
     * \brief Cette méthode permet d'ajouter une porte à la liste de portes.

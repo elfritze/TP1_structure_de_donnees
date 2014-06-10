@@ -51,18 +51,18 @@ class Porte
 {
 public:
    /**
+    * \brief Constructeur avec paramètres.
+    *
+    * \post Une instance de la classe Porte est initialisée.
+    */
+   Porte(Couleur c, Piece * d);
+
+   /**
     * \brief Construteur par défaut.
     *
     * \post Une instance de la classe Porte est initialisée.
     */
    Porte();
-
-   /**
-    * \brief Constructeur avec paramètres.
-    *
-    * \post Une instance de la classe Porte est initialisée.
-    */
-   Porte(Couleur c, Piece* d);
 
    /**
     * \brief Destructeur.
@@ -97,10 +97,10 @@ public:
     *
     * \post Le pointeur vers la pièce de destination est retourné.
     */
-   Piece* getDestination() const;
+   Piece * getDestination() const;
 
 private:
-   Piece* destination; /*!< Vers où la porte mène. */
+   Piece * destination; /*!< Vers où la porte mène. */
    Couleur color; /*!< Couleur de la porte. Cette couleur spécifie en même temps quel est le
                        joueur qui a le droit de franchir cette porte. */
 };

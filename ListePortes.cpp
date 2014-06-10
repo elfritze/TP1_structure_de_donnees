@@ -86,11 +86,11 @@ const ListePortes& ListePortes::operator =(const ListePortes& source)
 }
 
 /**
- * \fn void ListePortes::ajoutePorte(Porte& p)
+ * \fn void ListePortes::ajoutePorte(Porte &p)
  *
  * \param[in] p : Un objet Porte.
  */
-void ListePortes::ajoutePorte(Porte& p)
+void ListePortes::ajoutePorte(Porte &p)
 {
    // on vérifie que la porte n'est pas déjà présente
    NoeudListePortes* courant = acces;
@@ -231,11 +231,11 @@ Porte ListePortes::elementAt(int pos) const
 }
 
 /**
- * \fn void ListePortes::_copier(NoeudListePortes* sourceAcces)
+ * \fn void ListePortes::_copier(NoeudListePortes * sourceAcces)
  *
  * \param[in] sourceAcces : Un pointeur sur le début de la liste source.
  */
-void ListePortes::_copier(NoeudListePortes* sourceAcces)
+void ListePortes::_copier(NoeudListePortes * sourceAcces)
 {
    try
    {

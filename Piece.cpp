@@ -26,11 +26,11 @@ Piece::Piece() :
 }
 
 /**
- * \overload Piece::Piece(const std::string& s)
+ * \overload Piece::Piece(const std::string & s)
  *
  * \param[in] s : Une chaîne de caractères représentant le nom de la pièce.
  */
-Piece::Piece(const std::string& s) :
+Piece::Piece(const std::string & s) :
       portes(ListePortes()), parcourue(false), nom(s)
 {
 
@@ -106,11 +106,11 @@ bool Piece::getParcourue() const
 }
 
 /**
- * \fn const ListePortes& Piece::getPortes() const
+ * \fn const ListePortes & Piece::getPortes() const
  *
  * \return portes : Un objet ListePortes représentant la liste de portes de la pièce.
  */
-const ListePortes& Piece::getPortes() const
+const ListePortes & Piece::getPortes() const
 {
    return portes;
 }

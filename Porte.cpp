@@ -17,22 +17,22 @@ namespace TP1
 {
 
 /**
- * \fn Porte::Porte()
+ * \fn Porte::Porte(Couleur c, Piece * d)
+ *
+ * \param[in] c : La couleur de la porte.
+ * \param[in] d : La pièce de destination.
  */
-Porte::Porte() :
-      destination(0), color(Aucun)
+Porte::Porte(Couleur c, Piece * d) :
+      destination(d), color(c)
 {
 
 }
 
 /**
- * \fn Porte::Porte(Couleur c, Piece* d)
- *
- * \param[in] c : La couleur de la porte.
- * \param[in] d : La pièce de destination.
+ * \fn Porte::Porte()
  */
-Porte::Porte(Couleur c, Piece* d) :
-      destination(d), color(c)
+Porte::Porte() :
+      destination(0), color(Aucun)
 {
 
 }
@@ -85,11 +85,11 @@ Couleur Porte::getCouleur() const
 }
 
 /**
- * \fn Piece* Porte::getDestination() const
+ * \fn Piece * Porte::getDestination() const
  *
  * \return destination : La pièce de destination d'une porte.
  */
-Piece* Porte::getDestination() const
+Piece * Porte::getDestination() const
 {
    return destination;
 }

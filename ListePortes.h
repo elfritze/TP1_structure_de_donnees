@@ -72,7 +72,7 @@ public:
     *
     * \exception logic_error : Si tentative d'ajouter une porte déjà présente (doublon).
     */
-	void ajoutePorte(Porte& p);
+	void ajoutePorte(Porte &p);
 
 	/**
     * \brief Cette méthode retourne le nombre de portes présentes dans la ListePortes.
@@ -124,9 +124,9 @@ private:
 	{
 		public:
 			Porte porte; /*!< La porte contenue dans ce noeud de la liste. */
-			NoeudListePortes* suivant; /*!< Un pointeur vers le noeud suivant de la liste.
+			NoeudListePortes *suivant; /*!< Un pointeur vers le noeud suivant de la liste.
 			                                NULL s'il s'agit du dernier noeud. */
-			NoeudListePortes* precedent; /*!< Un pointeur vers le noeud précédent de la liste.
+			NoeudListePortes *precedent; /*!< Un pointeur vers le noeud précédent de la liste.
                                            NULL s'il s'agit du premier noeud. */
 
 			/**
@@ -139,8 +139,8 @@ private:
 			                          porte(porte), suivant(next_ptr), precedent(prev_ptr){}
 	};
 
-   NoeudListePortes* acces; /*!< Pointeur sur le début de la liste des portes. */
-	NoeudListePortes* fin; /*!< Pointeur sur la fin de la liste des portes. */
+   NoeudListePortes *acces; /*!< Pointeur sur le début de la liste des portes. */
+	NoeudListePortes *fin; /*!< Pointeur sur la fin de la liste des portes. */
 	int nbPorte; /*!< Nombre de portes dans la liste des portes. */
 
 	// Méthodes privées
@@ -150,7 +150,7 @@ private:
     *
     * \post Une copie profonde d'une liste de portes est créée.
     */
-	void _copier(NoeudListePortes* sourceAcces);
+	void _copier(NoeudListePortes *);
 
 	/**
     * \brief Cette méthode privée sert à détruire une liste de portes.

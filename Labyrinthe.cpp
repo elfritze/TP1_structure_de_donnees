@@ -19,7 +19,7 @@ namespace TP1
 
 
 	//Constructeur par défaut
-	Labyrinthe::Labyrinthe() : depart(0),arrivee(0),dernier(0){}
+	Labyrinthe::Labyrinthe() : dernier(0),depart(0),arrivee(0) {}
 
 	//Destructeur
 	Labyrinthe:: ~Labyrinthe()
@@ -353,10 +353,18 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 		int min = 99999; // Plus petit nombre de déplacements
 
 		// Chaque ligne vérifie si le minimum est plus petit que le nombre de déplacements du joueur et qu'on a bien une solution (différent de 0)
-		nbR < min && nbR != 0 ? min= nbR : min = min;
-		nbV < min && nbV != 0 ? min= nbV : min = min;
-		nbB < min && nbB != 0 ? min= nbB : min = min;
-		nbJ < min && nbJ != 0 ? min= nbJ : min = min;
+
+      if (nbR < min && nbR != 0)
+         min= nbR;
+
+      if (nbV < min && nbV != 0)
+         min= nbV;
+
+      if (nbB < min && nbB != 0)
+         min= nbB;
+
+      if (nbJ < min && nbJ != 0)
+         min= nbJ;
 
 		//On retourne le plus petit score, sinon on retourne une couleur vide
 		if(min == nbR)
@@ -368,7 +376,7 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 		else if(min==nbJ)
 			return Jaune;
 		else
-			return Couleur();
+			return Aucun;
 	}
 
 	

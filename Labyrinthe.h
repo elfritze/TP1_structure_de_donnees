@@ -191,7 +191,7 @@ private:
     *
     * \post Une copie profonde est créée.
     */
-	void _copier( NoeudListePieces *);
+	void _copier(NoeudListePieces *);
 
    /**
     * \brief Cette méthode privée sert à détruire un labyrinthe.

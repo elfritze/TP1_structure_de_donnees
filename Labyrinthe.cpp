@@ -42,9 +42,13 @@ Labyrinthe::~Labyrinthe()
 Labyrinthe::Labyrinthe(const Labyrinthe& l)
 {
    if (l.dernier == 0)
-      dernier = 0;
+   {
+      dernier = 0; // la liste originale est vide
+   }
    else
+   {
       _copier(l.dernier);
+   }
 }
 
 /**
@@ -56,11 +60,20 @@ Labyrinthe::Labyrinthe(const Labyrinthe& l)
  */
 const Labyrinthe& Labyrinthe::operator =(const Labyrinthe& source)
 {
-   _detruire();
-   if (source.dernier == 0)
-      dernier = 0;
-   else
-      _copier(source.dernier);
+   if (this != &source)
+   {
+      // On détruit la liste originale
+      _detruire();
+
+      if (source.dernier == 0)
+      {
+         dernier = 0;  // la liste source est vide
+      }
+      else
+      {
+         _copier(source.dernier);
+      }
+   }
 
    return (*this);
 }
@@ -77,11 +90,13 @@ const Labyrinthe& Labyrinthe::operator =(const Labyrinthe& source)
 void Labyrinthe::chargeLabyrinthe(Couleur couleur, std::ifstream &entree)
 {
    //Voici comment un labyrinthe est mis en mémoire:
-   //1- ChargerLabyrinthe() appelle ajoutePieceLabyrinthe()
+   //1- chargerLabyrinthe() appelle ajoutePieceLabyrinthe()
    //2- ajoutePieceLabyrinthe() ajoute la pièce si elle n'existe pas déjà.
-   //3- Si la pièce existe déjà, ajoutePieceLabyrinthe() n'ajoute pas de pièce et laisse le programme rouler
-   //4- On sort de ajoutePieceLabyrinthe() et ChargerLabyrinthe() fait quelques opérations pour ensuite appeler ajoutePassage()
-   //5- ajoutePassage() ajoute les portes à la pièce qui à été préalablement créée ou qui existait déjà
+   //3- Si la pièce existe déjà, ajoutePieceLabyrinthe() n'ajoute pas de pièce et
+   //   laisse le programme rouler
+   //4- On sort de ajoutePieceLabyrinthe() et chargerLabyrinthe() fait quelques opérations
+   //   pour ensuite appeler ajoutePassage()
+   //5- ajoutePassage() ajoute les portes à la pièce qui a été créée ou qui existait déjà
    //6- La pièce et les portes sont créées et on passe à une autre pièce
 
    int nbCols, nbRangs;
@@ -95,7 +110,8 @@ void Labyrinthe::chargeLabyrinthe(Couleur couleur, std::ifstream &entree)
    entree.getline(ligne, MAX_LIGNE);
    entree.getline(ligne, MAX_LIGNE);
 
-   std::ostringstream s; //Une chaîne pour écrire dedans, cette chaîne servira pour nommer les pièces du labyrinthe
+   std::ostringstream s; //Une chaîne pour écrire dedans,
+                         //cette chaîne servira pour nommer les pièces du labyrinthe
 
    for (int i = 0; i < nbCols; i++)
    {
@@ -214,19 +230,17 @@ void Labyrinthe::chargeLabyrinthe(Couleur couleur, std::ifstream &entree)
  */
 void Labyrinthe::ajoutePieceLabyrinthe(Piece &p)
 {
-
    if (dernier == 0)
    {
-      //Dans le cas ou la liste est vide
+      //Dans le cas où la liste est vide
       dernier = new NoeudListePieces(p);
       dernier->suivant = dernier;
    }
    else
    {
-
-      //On parcour la liste pour vérifier si une piece porte un même nom
+      //On parcourt la liste pour vérifier si une pièce porte un même nom
       NoeudListePieces *courant = 0;
-      courant = dernier;
+      courant = dernier->suivant;
       while (courant != dernier)
       {
          if (courant->piece.getNom() == p.getNom())
@@ -234,7 +248,7 @@ void Labyrinthe::ajoutePieceLabyrinthe(Piece &p)
          courant = courant->suivant;
       }
 
-      //On ajoute la piece à la fin.
+      //On ajoute la pièce à la fin.
       NoeudListePieces *nouveau = new NoeudListePieces(p);
       nouveau->suivant = dernier->suivant;
       dernier->suivant = nouveau;
@@ -466,19 +480,19 @@ void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
  */
 Labyrinthe::NoeudListePieces *Labyrinthe::trouvePiece(std::string &nom) const
 {
-   //Si le nom est vide on lance une exception
+   // Si le nom est vide, on lance une exception
    if (nom == "")
       throw std::invalid_argument("trouvePiece: Le nom passé en paramètre est vide");
 
-   //On parcour la liste pour vérifier si une piece porte un même nom
+   // On parcourt la liste pour vérifier si une pièce porte un même nom
    NoeudListePieces *courant = 0;
    courant = dernier->suivant;
 
-   //Si le dernier est la piece recherchée
+   // Si le dernier est la pièce recherchée
    if (dernier->piece.getNom() == nom)
       return dernier;
 
-   //On parcoure toutes les pièces à la recherche de la bonne.
+   // On parcourt toutes les pièces à la recherche de la bonne.
    while (courant != dernier)
    {
       if (courant->piece.getNom() == nom)
@@ -487,7 +501,7 @@ Labyrinthe::NoeudListePieces *Labyrinthe::trouvePiece(std::string &nom) const
       courant = courant->suivant;
    }
 
-   //Si la piece est introuvable on lance une exception
+   // Si la pièce est introuvable, on lance une exception
    throw std::logic_error("trouvePiece: La pièce n'a pas été trouvée");
 }
 
@@ -526,9 +540,11 @@ void Labyrinthe::_copier(NoeudListePieces * sn)
 {
    try
    {
+      // On copie le dernier noeud
       dernier = new NoeudListePieces(sn->piece);
+
+      // On copie chaque noeud et on passe au suivant
       NoeudListePieces * nouveau = dernier;
-      //On copie chaque noeud et on passe au suivant
       for (NoeudListePieces * temp = sn->suivant; temp != sn; temp = temp->suivant)
       {
          nouveau->suivant = new NoeudListePieces(temp->piece);
@@ -539,7 +555,11 @@ void Labyrinthe::_copier(NoeudListePieces * sn)
    }
    catch (std::exception&)
    {
+      // Il y a une erreur d'allocation de mémoire
+      // Il faut libérer la mémoire déjà allouée
       _detruire();
+
+      // On relance alors l'exception pour indiquer qu'une erreur est survenue
       throw;
    }
 }

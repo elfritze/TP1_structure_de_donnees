@@ -35,71 +35,87 @@ int main()
 
 		if (!entree)
 		{
-			cout << "Fichier rouge introuvable.\n";
+			cerr << "Fichier Rouge introuvable.\n";
 			return 1;
 		}
 
 		lab.chargeLabyrinthe(Rouge, entree);
-		cout << "\nLabyrinthe rouge chargé.\n";
+		cout << "Labyrinthe Rouge chargé.\n" << endl;
 		entree.close(); //on ferme le fichier
 
 		entree.open("FichiersLabyrinthe/Lab2x3/Vert.txt", ios::in);
 		if (!entree)
 		{
-			cout << "Fichier vert introuvable.\n";
+			cerr << "Fichier Vert introuvable.\n";
 			return 1;
 		}
 
 		lab.chargeLabyrinthe(Vert, entree);
-		cout << "\nLabyrinthe vert chargé.\n";
+		cout << "Labyrinthe Vert chargé.\n" << endl;
 		entree.close();
 
 		entree.open("FichiersLabyrinthe/Lab2x3/Bleu.txt", ios::in);
 		if (!entree)
 		{
-			cout << "Fichier bleu introuvable.\n";
+			cerr << "Fichier Bleu introuvable.\n";
 			return 1;
 		}
 
 		lab.chargeLabyrinthe(Bleu, entree);
-		cout << "\nLabyrinthe bleu chargé.\n";
+		cout << "Labyrinthe Bleu chargé.\n" << endl;
 		entree.close();
 
 		entree.open("FichiersLabyrinthe/Lab2x3/Jaune.txt", ios::in);
 		if (!entree)
 		{
-			cout << "Fichier jaune introuvable.\n\n";
+			cerr << "Fichier Jaune introuvable.\n";
 			return 1;
 		}
 
 		lab.chargeLabyrinthe(Jaune, entree);
-		cout << "\nLabyrinthe jaune chargé.\n";
+		cout << "Labyrinthe Jaune chargé.\n" << endl << endl;
 		entree.close();
 
+
+		// Test pour la méthode solutionner() de la classe Labyrinthe
 		int nbR = lab.solutionner(Rouge);
 		int nbV = lab.solutionner(Vert);
 		int nbB = lab.solutionner(Bleu);
 		int nbJ = lab.solutionner(Jaune);
 
-		nbR == -1 ? cout << "\nLe joueur rouge ne peut solutionner le labyrinthe" : cout << "\nLe joueur rouge peut solutionner le labyrinthe en " << nbR << " déplacements.\n";
-		nbV == -1 ? cout << "\nLe joueur vert ne peut solutionner le labyrinthe" : cout << "\nLe joueur vert peut solutionner le labyrinthe en " << nbV << " déplacements.\n";
-		nbB == -1 ? cout << "\nLe joueur bleu ne peut solutionner le labyrinthe" : cout << "\nLe joueur bleu peut solutionner le labyrinthe en " << nbB << " déplacements.\n";
-		nbJ == -1 ? cout << "\nLe joueur jaune ne peut solutionner le labyrinthe" : cout << "\nLe joueur jaune peut solutionner le labyrinthe en " << nbJ << " déplacements.\n";
+		nbR == -1 ? cout << "Le joueur Rouge ne peut solutionner le labyrinthe.\n" << endl :
+		            cout << "Le joueur Rouge peut solutionner le labyrinthe en "
+		            << nbR << " déplacements.\n" << endl;
 
+		nbV == -1 ? cout << "Le joueur Vert ne peut solutionner le labyrinthe.\n" << endl :
+		            cout << "Le joueur Vert peut solutionner le labyrinthe en "
+		            << nbV << " déplacements.\n" << endl;
+
+		nbB == -1 ? cout << "Le joueur Bleu ne peut solutionner le labyrinthe.\n" << endl :
+		            cout << "Le joueur Bleu peut solutionner le labyrinthe en "
+		            << nbB << " déplacements.\n" << endl;
+
+		nbJ == -1 ? cout << "Le joueur Jaune ne peut solutionner le labyrinthe.\n" << endl :
+		            cout << "Le joueur Jaune peut solutionner le labyrinthe en "
+		            << nbJ << " déplacements.\n" << endl;
+
+
+		// Test de la méthode trouveGagnant() de la classe Labyrinthe
 		Couleur LeGagnant = lab.trouveGagnant();
 		switch (LeGagnant)
 		{
 		case 0:
-			cout << endl << "\nLe joueur gagnant : Rouge" << endl << endl; break;
+			cout << endl << "Le joueur gagnant: Rouge\n" << endl << endl; break;
 		case 1:
-			cout << endl << "\nLe joueur gagnant : Vert" << endl << endl; break;
+			cout << endl << "Le joueur gagnant: Vert\n" << endl << endl; break;
 		case 2:
-			cout << endl << "\nLe joueur gagnant : Bleu" << endl << endl; break;
+			cout << endl << "Le joueur gagnant: Bleu\n" << endl << endl; break;
 		case 3:
-			cout << endl << "\nLe joueur gagnant : Jaune" << endl << endl; break;
+			cout << endl << "Le joueur gagnant: Jaune\n" << endl << endl; break;
 		default:
-			cout << endl << "\nAucun joueur gagnant !" << endl << endl; break;
+			cout << endl << "Le joueur gagnant: aucun!!\n" << endl << endl; break;
 		}
+
 
 		//Simulation de l'appel de la méthode cheminLabyrinthe() puis affichage du chemin retourné.
 		TP1::Chemin nomduchemin;
@@ -118,8 +134,7 @@ int main()
 		std::cout << std::endl << "Chemin Jaune : " << std::endl;
 		nomduchemin = lab.cheminLabyrinthe(TP1::Jaune);
 		nomduchemin.afficheChemin();
-		//string str;
-		//getline(cin, str);
+
 
 	} catch (exception & e)
 	{

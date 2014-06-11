@@ -416,7 +416,7 @@ Chemin Labyrinthe::cheminLabyrinthe(Couleur joueur)
    // On crée un chemin pour stocker les informations
    Chemin ch;
 
-   // Début de l'algorithme (semblable à celui de solutionnerLabyrinthe())
+   // Début de l'algorithme (semblable à celui de solutionner())
    bool done = false;
    int distance = 0;
    string nomPiece = "";

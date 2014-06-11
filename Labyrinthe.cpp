@@ -267,28 +267,10 @@ void Labyrinthe::ajoutePieceLabyrinthe(Piece &p)
  */
 int Labyrinthe::solutionner(Couleur joueur)
 {
-   //Si un labyrinthe ne peut pas être solutionné par le joueur, il faut retourner -1. Dans ce cas,
-   //nous ne considèrerons pas cela comme un appel anormal de la fonction.
-   //Vous devez utiliser l'algorithme suivant pour solutionner le labyrinthe, en utilisant la classe FilePieces:
-   // 1. Enfiler la pièce de départ en lui associant une distance du départ de zéro.
-   // 2. Faire
-   //       1. Défiler une pièce
-   //       2. Enfiler toutes les pièces qui sont accessibles à partir de cette pièce à l'aide d'une porte
-   //          de la couleur du joueur, et qui n'ont pas été déjà parcourues, en leur associant la distance
-   //       du départ de la pièce défilée plus un.
-   //
-   //       Remarquez qu'il faut faire une vérification double ici. Il faut d'abord chercher les portes dans la liste
-   //       de portes de la pièce défilée, puis il faut ensuite aussi chercher les portes dans les listes de portes de
-   //       toutes les pièces pour voir s'il y en aurait qui mènent à la pièce défilée. Ceci est nécessaire car les portes
-   //       ne sont pas à sens unique, mais la méthode qui charge un labyrinthe fournie ne les ajoute qu'une seule fois
-   //       dans le modèle d'implantation. Afin de savoir si une pièce a déjà été parcourue ou non, employez le champ
-   //       booléen parcourue. N'enfilez que des pièces pour lesquelles ce champ a false comme valeur, puis au moment
-   //       où vous l'enfilez, appliquez-lui la valeur true. Aussi, n'oubliez pas, avant de commencer l'algorithme, de
-   //       mettre ce champ à false pour toutes les pièces du labyrinthe.
-   //
-   // Tant qu'il reste des pièces dans la file et que la pièce d'arrivée n'a pas encore été atteinte (défilée).
+   // Si un labyrinthe ne peut pas être solutionné par le joueur, il faut retourner -1.
+   // Dans ce cas, il ne s'agit pas d'un appel anormal de la méthode.
 
-   //On reset le chemin pour qu'aucune piece ne soit parcourue
+   // On réinitialise le chemin pour qu'aucune pièce ne soit parcourue
    dernier->piece.setParcourue(false);
    NoeudListePieces *videur = 0;
    videur = dernier->suivant;
@@ -300,7 +282,7 @@ int Labyrinthe::solutionner(Couleur joueur)
    videur = 0;
    delete videur;
 
-   //Début de l'algoritme de solution
+   // Début de l'algorithme de solution
    bool done = false;
    int distance = 0;
    string nomPiece = "";
@@ -311,58 +293,57 @@ int Labyrinthe::solutionner(Couleur joueur)
    courant->setParcourue(true);
    do
    {
-      //On enlever la premiere piece
+      // On enlève la première pièce
       pieces.defilePiece(nomPiece, distance);
       courant = &trouvePiece(nomPiece)->piece;
 
-      //Si la piece dépilée est la fin du labyrinthe on a trouvé la sortie
+      // Si la pièce défilée est la fin du labyrinthe, on a trouvé la sortie
       if (courant->getNom() == arrivee->getNom())
          done = true;
 
-      //On parcoure toutes les portes de la pièce défilée pour trouver les destinations possibles
+      // On parcourt toutes les portes de la pièce défilée pour trouver les destinations possibles
       for (int i = 1; i <= courant->getPortes().tailleListePortes(); i++)
       {
-
-         //Destination possible
+         // Destination possible
          temp = courant->getPortes().elementAt(i).getDestination();
 
-         //On s'assure que la porte soit de la même couleur que le joueur et qu'elle n'a pas été parcourue.
+         // On s'assure que la porte est de la même couleur que le joueur et
+         // qu'elle n'a pas été parcourue.
          if (!temp->getParcourue() && courant->getPortes().elementAt(i).getCouleur() == joueur)
          {
             temp->setParcourue(true);
 
-            //Si la porte est valide on ajoute sa piece à la file
+            // Si la porte est valide, on ajoute sa pièce à la file
             pieces.enfilePiece(temp->getNom(), distance + 1);
          }
-
       }
 
       // On parcoure toutes les pièces du labyrinthe à la recherche de portes qui mène à la pièce actuelle
       for (NoeudListePieces * i = dernier->suivant; i != dernier; i = i->suivant)
       {
-         //On parcoure chacune des portes de la piece
+         // On parcourt chacune des portes de la pièce
          for (int j = 1; j <= i->piece.getPortes().tailleListePortes(); j++)
          {
-
             temp = i->piece.getPortes().elementAt(j).getDestination();
 
-            //On s'assure que la destionation n'est pas parcourue, que la piece est de la bonne couleur et que la piece liée à la porte est la pièce actuelle
+            // On s'assure que la destination n'est pas parcourue, que la pièce est de la bonne
+            // couleur et que la pièce liée à la porte est la pièce actuelle
             if (i->piece.getPortes().elementAt(j).getCouleur() == joueur && temp == courant
                   && !i->piece.getParcourue())
             {
                temp->setParcourue(true);
                pieces.enfilePiece(i->piece.getNom(), distance + 1);
             }
-
          }
       }
 
-   } while (!pieces.estVideFile() && !done); // On arrête si la file est vide (aucune solution) ou si la fin a été trouvée
+   } while (!pieces.estVideFile() && !done); // On arrête si la file est vide (aucune solution)
+                                             // ou si la fin a été trouvée
 
    if (done)
       return distance;
    else
-      return 0; // On retourne 0 si aucune solution
+      return -1; // On retourne -1 si aucune solution
 }
 
 /**
@@ -381,18 +362,18 @@ Couleur Labyrinthe::trouveGagnant()
    int min = 99999; // Plus petit nombre de déplacements
 
    // On vérifie si le minimum est plus petit que le nombre de déplacements du joueur
-   // et qu'on a bien une solution (différent de 0)
+   // et qu'on a bien une solution (différent de -1)
 
-   if (nbR < min && nbR != 0)
+   if (nbR < min && nbR != -1)
       min = nbR;
 
-   if (nbV < min && nbV != 0)
+   if (nbV < min && nbV != -1)
       min = nbV;
 
-   if (nbB < min && nbB != 0)
+   if (nbB < min && nbB != -1)
       min = nbB;
 
-   if (nbJ < min && nbJ != 0)
+   if (nbJ < min && nbJ != -1)
       min = nbJ;
 
    // On retourne le plus petit résultat, sinon on retourne Aucun

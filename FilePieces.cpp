@@ -22,7 +22,6 @@ namespace TP1
 FilePieces::FilePieces() :
       ch(Chemin())
 {
-
 }
 
 /**
@@ -40,7 +39,7 @@ FilePieces::~FilePieces()
  */
 FilePieces::FilePieces(const FilePieces& f)
 {
-   ch = f.ch;
+   ch = f.ch; // surcharge de l'opérateur d'assignation de Chemin
 }
 
 /**
@@ -52,7 +51,12 @@ FilePieces::FilePieces(const FilePieces& f)
  */
 const FilePieces& FilePieces::operator =(const FilePieces& source)
 {
-   return source;
+   if (this != &source)
+   {
+      ch = source.ch; // surcharge de l'opérateur d'assignation de Chemin
+   }
+
+   return (*this);
 }
 
 /**
@@ -63,26 +67,30 @@ const FilePieces& FilePieces::operator =(const FilePieces& source)
  */
 void FilePieces::enfilePiece(const std::string &nomPiece, int distanceDuDebut)
 {
-   // appel de la méthode ajoutePiece de la classe chemin
+   // appel de la méthode ajoutePiece() de la classe Chemin
    ch.ajoutePiece(nomPiece, distanceDuDebut);
 }
 
 /**
  * \fn void FilePieces::defilePiece(std::string & nomPieceRetiree, int &distanceDuDebut)
  *
- * \param[in] nomPieceRetiree : Le nom de la pièce à retirer de la file.
- * \param[in] distanceDuDebut : Le nombre de déplacement depuis le début du labyrinthe.
+ * \param[in] nomPieceRetiree : Un nom de pièce.
+ * \param[in] distanceDuDebut : Un nombre de déplacement depuis le début du labyrinthe.
  */
 void FilePieces::defilePiece(std::string & nomPieceRetiree, int &distanceDuDebut)
 {
-   //Retire une pièce du début d'une file et place le nom de la pièce retirée dans nomPieceRetiree,
-   //et sa distance du début dans distanceDuDebut. Puisqu'une file de pièces est définie par un chemin,
-   //cette fonction fera un appel à la fonction retirePiece().
-   //Une exception logic_error devra être levée si la file est vide.
+   // Si la file est vide, une exception sera lancée
 
-   nomPieceRetiree = ch.getNomPiece();
-   distanceDuDebut = ch.getDistanceDuDebut();
-   ch.retirePiece(1);
+   if (!estVideFile())
+   {
+      nomPieceRetiree = ch.getNomPiece();
+      distanceDuDebut = ch.getDistanceDuDebut();
+      ch.retirePiece(1);
+   }
+   else
+   {
+      throw std::logic_error("defilePiece: La file est vide");
+   }
 }
 
 /**

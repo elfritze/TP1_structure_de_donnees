@@ -30,7 +30,7 @@ namespace TP1
  * \brief Cette classe sert à définir une file de pièces.
  *
  * Une file de pièces est définie par un chemin et sert à résoudre la méthode solutionLabyrinthe()
- * de la classe Labyrinthe. Les fonctions qui permettent d'opérer la file seront implémentées tout
+ * de la classe Labyrinthe. Les fonctions qui permettent d'opérer la file sont implémentées tout
  * simplement par des appels aux fonctions permettant d'opérer sur un chemin.
  */
 class FilePieces
@@ -91,7 +91,7 @@ public:
    bool estVideFile() const;
 
 private:
-   Chemin ch; /*!< Une file est définie comme étant un chemin. Les fonctions implémentées font
+   Chemin ch; /*!< Une file est définie comme étant un chemin. Les méthodes implémentées font
                    tout simplement des appels aux fonctions permettant d'opérer un chemin. */
 };
 

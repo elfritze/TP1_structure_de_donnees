@@ -25,7 +25,6 @@ namespace TP1
 Chemin::Chemin() :
       debut(0)
 {
-
 }
 
 /**
@@ -129,7 +128,9 @@ void Chemin::retirePiece(int numPiece)
       delete courant;
    }
    else
-      throw std::invalid_argument("L'indice est invalide");
+   {
+      throw std::invalid_argument("retirePiece: L'indice est invalide");
+   }
 }
 
 /**
@@ -161,7 +162,9 @@ int Chemin::tailleChemin() const
 {
    int i = 0;
    for (NoeudChemin* temp = debut; temp != 0; temp = temp->suivant)
+   {
       i++;
+   }
 
    return i;
 }

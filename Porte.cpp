@@ -25,7 +25,6 @@ namespace TP1
 Porte::Porte(Couleur c, Piece * d) :
       destination(d), color(c)
 {
-
 }
 
 /**
@@ -34,7 +33,6 @@ Porte::Porte(Couleur c, Piece * d) :
 Porte::Porte() :
       destination(0), color(Aucun)
 {
-
 }
 
 /**
@@ -42,7 +40,6 @@ Porte::Porte() :
  */
 Porte::~Porte()
 {
-
 }
 
 /**

@@ -65,7 +65,7 @@ public:
 	/**
     * \brief Cette méthode doit ajouter la Porte p à la ListePortes.
     *
-    * \pre p ne doit pas avoir la même couleur et la même destination
+    * \pre La porte p ne doit pas avoir la même couleur et la même destination
     *      qu'une porte déjà présente dans la liste de portes.
     *
     * \post L'objet p est ajouté à la liste de portes.
@@ -104,7 +104,7 @@ public:
 	/**
     * \brief Cette méthode retourne l'élément Porte dans la liste à une position donnée.
     *
-    * \pre pos : La première position est en position 1.
+    * \pre La première position est en position 1.
     *
     * \post La porte à la position pos est retournée.
     *
@@ -139,9 +139,9 @@ private:
 			                          porte(porte), suivant(next_ptr), precedent(prev_ptr){}
 	};
 
-   NoeudListePortes *acces; /*!< Pointeur sur le début de la liste des portes. */
-	NoeudListePortes *fin; /*!< Pointeur sur la fin de la liste des portes. */
-	int nbPorte; /*!< Nombre de portes dans la liste des portes. */
+   NoeudListePortes *acces; /*!< Pointeur sur le début de la liste de portes. */
+	NoeudListePortes *fin; /*!< Pointeur sur la fin de la liste de portes. */
+	int nbPorte; /*!< Nombre de portes dans la liste de portes. */
 
 	// Méthodes privées
 

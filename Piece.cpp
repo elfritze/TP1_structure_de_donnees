@@ -22,7 +22,6 @@ namespace TP1
 Piece::Piece() :
       portes(ListePortes()), parcourue(false)
 {
-
 }
 
 /**
@@ -33,7 +32,6 @@ Piece::Piece() :
 Piece::Piece(const std::string & s) :
       portes(ListePortes()), parcourue(false), nom(s)
 {
-
 }
 
 /**
@@ -51,7 +49,7 @@ Piece::~Piece()
  */
 Piece::Piece(const Piece& p)
 {
-   portes = p.portes;
+   portes = p.portes; // surcharge de l'opérateur d'assignation de ListePortes
    parcourue = p.parcourue;
    nom = p.nom;
 }
@@ -67,7 +65,7 @@ const Piece& Piece::operator =(const Piece& source)
 {
    if (this != &source)
    {
-      portes = source.portes;
+      portes = source.portes; // surcharge de l'opérateur d'assignation de ListePortes
       parcourue = source.parcourue;
       nom = source.nom;
    }
@@ -122,7 +120,7 @@ const ListePortes & Piece::getPortes() const
  */
 void Piece::ajoutePorte(Porte& p)
 {
-   portes.ajoutePorte(p);
+   portes.ajoutePorte(p); // appel de la méthode ajoutePorte() de ListePortes
 }
 
 } // namespace TP1

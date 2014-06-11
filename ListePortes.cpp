@@ -22,7 +22,6 @@ namespace TP1
 ListePortes::ListePortes() :
       acces(0), fin(0), nbPorte(0)
 {
-
 }
 
 /**

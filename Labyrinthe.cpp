@@ -291,6 +291,7 @@ int Labyrinthe::solutionner(Couleur joueur)
    FilePieces pieces = FilePieces();
    pieces.enfilePiece(courant->getNom(), 0);
    courant->setParcourue(true);
+
    do
    {
       // On enlève la première pièce
@@ -318,7 +319,8 @@ int Labyrinthe::solutionner(Couleur joueur)
          }
       }
 
-      // On parcoure toutes les pièces du labyrinthe à la recherche de portes qui mène à la pièce actuelle
+      // On parcourt toutes les pièces du labyrinthe à la recherche de portes
+      // qui mène à la pièce actuelle
       for (NoeudListePieces * i = dernier->suivant; i != dernier; i = i->suivant)
       {
          // On parcourt chacune des portes de la pièce
@@ -399,18 +401,93 @@ Couleur Labyrinthe::trouveGagnant()
  */
 Chemin Labyrinthe::cheminLabyrinthe(Couleur joueur)
 {
-   //Pour réussir à programmer cette fonction, vous devez prendre le même algorithme que celui proposé à la
-   //méthode solutionner(), mais vous devez trouver un moyen d'associer chaque pièce placée dans la file
-   //avec une référence à la pièce par laquelle on a dû passer pour se rendre à celle-ci. Il faut que ces
-   //associations, stockées dans des structures de données auxiliaires locales à la méthode cheminLabyrinthe(),
-   //persistent même lorsque les pièces sont défilées.
-   //
-   //Lorsque la pièce d'arrivée aura été atteinte, donc après la boucle de l'algorithme, il s'agira de parcourir
-   //vos associations en sens inverse pour retrouver, tour à tour, quelles
-   //pièces ont dû être traversées pour se rendre jusqu'à la fin du labyrinthe.
+   // On réinitialise le chemin pour qu'aucune pièce ne soit parcourue
+   dernier->piece.setParcourue(false);
+   NoeudListePieces *videur = 0;
+   videur = dernier->suivant;
+   while (videur != dernier)
+   {
+      videur->piece.setParcourue(false);
+      videur = videur->suivant;
+   }
+   videur = 0;
+   delete videur;
 
+   // On crée un chemin pour stocker les informations
+   Chemin ch;
 
-   return Chemin();
+   // Début de l'algorithme (semblable à celui de solutionnerLabyrinthe())
+   bool done = false;
+   int distance = 0;
+   string nomPiece = "";
+   Piece * courant = depart;
+   Piece * temp = 0;
+   FilePieces pieces = FilePieces();
+   pieces.enfilePiece(courant->getNom(), 0);
+   courant->setParcourue(true);
+
+   do
+   {
+      // On enlève la première pièce
+      pieces.defilePiece(nomPiece, distance);
+      courant = &trouvePiece(nomPiece)->piece;
+
+      // Si on avait déjà ajouté une pièce ayant la même distance, on la retire
+      if (ch.tailleChemin() == distance + 1)
+         ch.retirePiece(distance + 1); // retirePiece() commence à l'indice 1, donc on fait +1
+
+      // On ajoute la pièce défilée au chemin
+      ch.ajoutePiece(courant->getNom(), distance);
+
+      // Si la pièce défilée est la fin du labyrinthe, on a trouvé la sortie
+      if (courant->getNom() == arrivee->getNom())
+         done = true;
+
+      // On trouve ensuite les pièces suivantes à enfiler
+      // On parcourt toutes les portes de la pièce défilée pour trouver les destinations possibles
+      for (int i = 1; i <= courant->getPortes().tailleListePortes(); i++)
+      {
+         // Destination possible
+         temp = courant->getPortes().elementAt(i).getDestination();
+
+         // On s'assure que la porte est de la même couleur que le joueur et
+         // qu'elle n'a pas été parcourue.
+         if (!temp->getParcourue() && courant->getPortes().elementAt(i).getCouleur() == joueur)
+         {
+            temp->setParcourue(true);
+
+            // Si la porte est valide, on ajoute sa pièce à la file
+            pieces.enfilePiece(temp->getNom(), distance + 1);
+         }
+      }
+
+      // On parcourt toutes les pièces du labyrinthe à la recherche de portes
+      // qui mène à la pièce actuelle
+      for (NoeudListePieces * i = dernier->suivant; i != dernier; i = i->suivant)
+      {
+         // On parcourt chacune des portes de la pièce
+         for (int j = 1; j <= i->piece.getPortes().tailleListePortes(); j++)
+         {
+            temp = i->piece.getPortes().elementAt(j).getDestination();
+
+            // On s'assure que la destination n'est pas parcourue, que la pièce est de la bonne
+            // couleur et que la pièce liée à la porte est la pièce actuelle
+            if (i->piece.getPortes().elementAt(j).getCouleur() == joueur && temp == courant
+                  && !i->piece.getParcourue())
+            {
+               temp->setParcourue(true);
+               pieces.enfilePiece(i->piece.getNom(), distance + 1);
+            }
+         }
+      }
+
+   } while (!pieces.estVideFile() && !done); // On arrête si la file est vide (aucune solution)
+                                             // ou si la fin a été trouvée
+
+   if (done)
+      return ch; // On retourne le chemin
+   else
+      return Chemin(); // S'il n'y avait pas de solution, on retourne un chemin vide.
 }
 
 
@@ -429,7 +506,6 @@ Chemin Labyrinthe::cheminLabyrinthe(Couleur joueur)
  */
 void Labyrinthe::ajoutePassage(Couleur couleur, int i1, int j1, int i2, int j2)
 {
-
    NoeudListePieces *piece1, *piece2;
    string nomPiece1, nomPiece2;
    ostringstream s;

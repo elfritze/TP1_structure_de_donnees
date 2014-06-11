@@ -25,7 +25,7 @@ int main()
 	{
 		Labyrinthe lab;
 
-		ifstream entree("FichiersLabyrinthe/Lab2x3/rouge.txt");
+		ifstream entree("FichiersLabyrinthe/Lab2x3/Rouge.txt");
 		//Cette déclaration équivaut à :
 		//ifstream entree;
 		//entree.open("nomFichier", ios::in);
@@ -43,7 +43,7 @@ int main()
 		cout << "\nLabyrinthe rouge chargé.\n";
 		entree.close(); //on ferme le fichier
 
-		entree.open("FichiersLabyrinthe/Lab2x3/vert.txt", ios::in);
+		entree.open("FichiersLabyrinthe/Lab2x3/Vert.txt", ios::in);
 		if (!entree)
 		{
 			cout << "Fichier vert introuvable.\n";
@@ -54,7 +54,7 @@ int main()
 		cout << "\nLabyrinthe vert chargé.\n";
 		entree.close();
 
-		entree.open("FichiersLabyrinthe/Lab2x3/bleu.txt", ios::in);
+		entree.open("FichiersLabyrinthe/Lab2x3/Bleu.txt", ios::in);
 		if (!entree)
 		{
 			cout << "Fichier bleu introuvable.\n";
@@ -65,7 +65,7 @@ int main()
 		cout << "\nLabyrinthe bleu chargé.\n";
 		entree.close();
 
-		entree.open("FichiersLabyrinthe/Lab2x3/jaune.txt", ios::in);
+		entree.open("FichiersLabyrinthe/Lab2x3/Jaune.txt", ios::in);
 		if (!entree)
 		{
 			cout << "Fichier jaune introuvable.\n\n";

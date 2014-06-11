@@ -192,9 +192,16 @@ int Chemin::tailleChemin() const
  */
 void Chemin::afficheChemin() const
 {
-   for (NoeudChemin* temp = debut; temp != 0; temp = temp->suivant)
+   if (tailleChemin() == 0)
    {
-      cout << temp->nomPiece << " " << temp->distanceDuDebut;
+      cout << "Aucun chemin possible pour solutionner le labyrinthe." << endl;
+   }
+   else
+   {
+      for (NoeudChemin* temp = debut; temp != 0; temp = temp->suivant)
+      {
+         cout << temp->nomPiece << " " << temp->distanceDuDebut << endl;
+      }
    }
 }
 

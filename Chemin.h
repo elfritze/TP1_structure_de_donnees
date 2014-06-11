@@ -102,7 +102,7 @@ public:
 	int tailleChemin() const;
 
 	/**
-    * \brief Affiche le chemin, soit en affichant ligne par ligne chaque nom de case suivi
+    * \brief Affiche le chemin, soit en affichant ligne par ligne chaque nom de pièce suivi
     *        de la distance du début.
     *
     * \post Le chemin est affiché.

@@ -141,21 +141,25 @@ private:
 	NoeudChemin *debut; /*!< Un pointeur vers le premier noeud de la liste simplement chaînée.
 	                         Un chemin vide est représenté directement par le pointeur 0 (NULL). */
 
-   // Méthodes privées
+	int cpt; /*!< Le nombre de noeud dans la liste. */
 
-   /**
-    * \brief Cette méthode privée sert à détruire un chemin.
-    *
-    * \post Le chemin est détruit.
-    */
-   void  _detruire();
+
+   // Méthodes privées
 
    /**
     * \brief Cette méthode privée sert à copier.
     *
     * \post Une copie profonde est créée.
     */
-	void _copier(NoeudChemin *);
+   void _copier(NoeudChemin *);
+
+   /**
+    * \brief Cette méthode privée sert à détruire un chemin.
+    *
+    * \post Le chemin est détruit.
+    */
+   void _detruire();
+
 };
 
 } // namespace TP1

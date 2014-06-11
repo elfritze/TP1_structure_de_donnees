@@ -23,7 +23,7 @@ namespace TP1
  * \fn Chemin::Chemin()
  */
 Chemin::Chemin() :
-      debut(0)
+      debut(0), cpt(0)
 {
 }
 
@@ -43,6 +43,7 @@ Chemin::~Chemin()
 Chemin::Chemin(const Chemin& source)
 {
    debut = source.debut;
+   cpt = source.cpt;
    if (debut != 0)
    {
       _copier(source.debut);
@@ -58,13 +59,21 @@ Chemin::Chemin(const Chemin& source)
  */
 const Chemin& Chemin::operator=(const Chemin& source)
 {
-   if (debut != 0)
-      _detruire();
+   if (this != &source)
+   {
+      if (debut != 0)
+      {
+         _detruire();
+      }
 
-   //On copie le début
-   debut = source.debut;
-   if (source.debut != 0)
-      _copier(source.debut); //On appelle la méthode copier pour copier le reste de la liste chainée à partir du début.
+      // On copie à partir du début
+      debut = source.debut;
+      cpt = source.cpt;
+      if (source.debut != 0) // si la liste chaînée source n'est pas vide
+      {
+         _copier(source.debut);
+      }
+   }
 
    return (*this);
 }
@@ -77,22 +86,30 @@ const Chemin& Chemin::operator=(const Chemin& source)
  */
 void Chemin::ajoutePiece(const std::string &nomPiece, int distanceDuDebut)
 {
+   // On crée le nouveau noeud du chemin
    NoeudChemin * nouveau = new NoeudChemin(nomPiece, distanceDuDebut);
+   nouveau->suivant = 0;
+
+   // On parcourt la liste jusqu'à la fin
    NoeudChemin * courant = debut;
    NoeudChemin * pred = 0;
-
-   // On parcoure la liste jusqu'à la fin
    while (courant != 0)
    {
       pred = courant;
       courant = courant->suivant;
    }
 
-   //Si la liste est vide on insere au début
+   // Si la liste est vide, on insère au début
    if (debut == 0)
+   {
       debut = nouveau;
+   }
    else
+   {
       pred->suivant = nouveau; // Sinon on ajoute à la fin
+   }
+
+   cpt++;
 }
 
 /**
@@ -102,30 +119,37 @@ void Chemin::ajoutePiece(const std::string &nomPiece, int distanceDuDebut)
  */
 void Chemin::retirePiece(int numPiece)
 {
-   //Vérification
+   // Vérification des préconditions
    if (numPiece >= 1 && numPiece <= tailleChemin())
    {
       int i = 1;
       NoeudChemin * courant = debut;
-      NoeudChemin * precedent = courant;
+      NoeudChemin * precedent = 0;
 
-      //On loop n fois pour atteindre la piece désirée
+      // On boucle pour atteindre le noeud de la pièce désirée
       while (i < numPiece)
       {
          precedent = courant;
-         courant = courant->suivant;
+         courant = precedent->suivant;
          i++;
       }
 
-      //Si le noeud désiré est le premier on réassigne le début au suivant du début.
+      // Si le noeud désiré est le premier, on réassigne le début au noeud suivant.
       if (debut == courant)
+      {
          debut = courant->suivant;
+      }
       else
-         precedent->suivant = courant->suivant;	// Sinon on associe le suivant du noeud précédant le noeud désiré au noeud suivant du noeud désiré
+      {
+         // Sinon on associe le pointeur suivant du noeud précédant
+         // au noeud suivant du noeud à supprimer
+         precedent->suivant = courant->suivant;
+      }
 
-      //On se débarasse du noeud désiré
+      // On supprime le noeud désiré
       courant->suivant = 0;
       delete courant;
+      cpt--;
    }
    else
    {
@@ -160,13 +184,7 @@ int Chemin::getDistanceDuDebut() const
  */
 int Chemin::tailleChemin() const
 {
-   int i = 0;
-   for (NoeudChemin* temp = debut; temp != 0; temp = temp->suivant)
-   {
-      i++;
-   }
-
-   return i;
+   return cpt;
 }
 
 /**
@@ -181,18 +199,18 @@ void Chemin::afficheChemin() const
 }
 
 /**
- * \fn void Chemin::_copier(NoeudChemin* sn)
+ * \fn void Chemin::_copier(NoeudChemin * sn)
  *
  * \param[in] sn : Un pointeur sur le début du chemin.
  */
-void Chemin::_copier(NoeudChemin* sn)
+void Chemin::_copier(NoeudChemin * sn)
 {
    try
    {
-
-      // copier le premier noeud
+      // On copie le premier noeud
       debut = new NoeudChemin(sn->nomPiece, sn->distanceDuDebut);
 
+      // On copie le reste de la liste
       NoeudChemin* nouveau = debut;
       for (NoeudChemin* temp = sn->suivant; temp != 0; temp = temp->suivant)
       {
@@ -202,7 +220,11 @@ void Chemin::_copier(NoeudChemin* sn)
    }
    catch (std::exception&)
    {
+      // Il y a une erreur d'allocation de mémoire
+      // Il faut libérer la mémoire déjà allouée
       _detruire();
+
+      // On relance alors l'exception pour indiquer qu'une erreur est survenue
       throw;
    }
 }
@@ -212,16 +234,14 @@ void Chemin::_copier(NoeudChemin* sn)
  */
 void Chemin::_detruire()
 {
-   NoeudChemin * courant = debut;
-   NoeudChemin * temp = 0;
-   while (courant != 0)
+   NoeudChemin * temp = debut;
+   while(debut != 0)
    {
-      temp = courant->suivant;
-      delete courant;
-      courant = temp;
+      debut = temp->suivant;
+      delete temp;
+      temp = debut;
    }
-   debut = 0;
-   delete debut;
+   cpt = 0;
 }
 
 } // namespace TP1
